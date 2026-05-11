@@ -541,6 +541,7 @@ function startMode(modeId) {
     used: [],
     specialSlots: modeId === "boss-round" ? buildBossSpecialSlots(mode.total) : {},
     usedSpecialTypes: [],
+    usedBonusCaseKeys: [],
     answered: false,
     attempts: 0
   };
@@ -577,9 +578,10 @@ function nextQuestion() {
 function generateQuestion(session) {
   const { modeId, pool, used } = session;
   if (modeId === "boss-round" && session.specialSlots[session.index]) {
-    const specialQuestion = session.specialSlots[session.index] === "tip"
+    const specialType = session.specialSlots[session.index];
+    const specialQuestion = specialType === "tip"
       ? buildEligibleTipQuestion(session)
-      : pickBonusQuestion(session);
+      : pickBonusQuestion(session, specialType);
     if (specialQuestion) return specialQuestion;
   }
 
@@ -637,20 +639,29 @@ function generateQuestion(session) {
 
 function buildBossSpecialSlots(total) {
   const slots = {};
+  const planned = ["capital-call-in", "road-trip", "weird-neighbor-court", "capital-call-in", "mini"];
   Array.from({ length: Math.floor(total / 4) }, (_, index) => (index + 1) * 4).forEach((slot, index) => {
-    slots[slot] = index % 3 === 1 ? "tip" : "mini";
+    slots[slot] = planned[index] || "mini";
   });
   return slots;
 }
 
-function pickBonusQuestion(session) {
-  const candidates = [
-    buildEligibleCourtQuestion(session.pool, session.regionId),
-    buildEligibleRoadTripQuestion(session.pool, session.regionId),
-    buildEligibleSquareQuestion(session.pool, session.regionId),
-    buildEligibleHotlineQuestion(session.pool, session.regionId),
-    buildEligibleCapitalCallQuestion(session.pool, session.regionId)
-  ].filter(Boolean);
+function pickBonusQuestion(session, requestedType = "mini") {
+  const builders = {
+    "weird-neighbor-court": () => buildEligibleCourtQuestion(session),
+    "road-trip": () => buildEligibleRoadTripQuestion(session),
+    "square-off": () => buildEligibleSquareQuestion(session),
+    "borderline-hotline": () => buildEligibleHotlineQuestion(session),
+    "capital-call-in": () => buildEligibleCapitalCallQuestion(session)
+  };
+  if (requestedType !== "mini" && builders[requestedType]) {
+    const requested = builders[requestedType]();
+    if (requested) {
+      session.usedSpecialTypes.push(requested.bonusId);
+      return requested;
+    }
+  }
+  const candidates = Object.values(builders).map((build) => build()).filter(Boolean);
   if (!candidates.length) return null;
   const fresh = candidates.filter((question) => !session.usedSpecialTypes.includes(question.bonusId));
   const picked = randomItem(fresh.length ? fresh : candidates);
@@ -658,20 +669,20 @@ function pickBonusQuestion(session) {
   return picked;
 }
 
-function buildEligibleRoadTripQuestion(pool, regionId) {
-  const route = pickRoadTripRoute(pool, regionId);
+function buildEligibleRoadTripQuestion(session) {
+  const route = pickRoadTripRoute(session);
   return route ? buildRoadTripQuestion(route) : null;
 }
 
-function pickRoadTripRoute(pool, regionId) {
+function pickRoadTripRoute(session) {
   const roadTrip = BONUS_GAMES.find((game) => game.id === "road-trip");
   if (!roadTrip) return null;
-  const poolSet = new Set(pool);
+  const poolSet = new Set(session.pool);
   const eligibleRoutes = roadTrip.routes.filter((route) => {
-    if (regionId === "all") return true;
+    if (session.regionId === "all") return true;
     return routeStates(route).every((abbr) => poolSet.has(abbr));
   });
-  return eligibleRoutes.length ? randomItem(eligibleRoutes) : null;
+  return pickUnusedBonusCase("road-trip", eligibleRoutes, session);
 }
 
 function buildRoadTripQuestion(route) {
@@ -692,20 +703,20 @@ function buildRoadTripQuestion(route) {
   };
 }
 
-function buildEligibleCourtQuestion(pool, regionId) {
-  const caseItem = pickNeighborCourtCase(pool, regionId);
-  return caseItem ? buildCourtQuestion(caseItem, pool) : null;
+function buildEligibleCourtQuestion(session) {
+  const caseItem = pickNeighborCourtCase(session);
+  return caseItem ? buildCourtQuestion(caseItem, session.pool) : null;
 }
 
-function pickNeighborCourtCase(pool, regionId) {
+function pickNeighborCourtCase(session) {
   const court = BONUS_GAMES.find((game) => game.id === "weird-neighbor-court");
   if (!court) return null;
-  const poolSet = new Set(pool);
+  const poolSet = new Set(session.pool);
   const eligibleCases = court.cases.filter((caseItem) => {
-    if (regionId === "all") return true;
+    if (session.regionId === "all") return true;
     return caseStates(caseItem).every((abbr) => poolSet.has(abbr));
   });
-  return eligibleCases.length ? randomItem(eligibleCases) : null;
+  return pickUnusedBonusCase("weird-neighbor-court", eligibleCases, session);
 }
 
 function buildCourtQuestion(caseItem, pool) {
@@ -728,8 +739,8 @@ function buildCourtQuestion(caseItem, pool) {
   };
 }
 
-function buildEligibleSquareQuestion(pool, regionId) {
-  const caseItem = pickBonusCase("square-off", "cases", pool, regionId);
+function buildEligibleSquareQuestion(session) {
+  const caseItem = pickBonusCase("square-off", "cases", session);
   if (!caseItem) return null;
   const target = stateByAbbr.get(caseItem.targetAbbr);
   return {
@@ -744,13 +755,13 @@ function buildEligibleSquareQuestion(pool, regionId) {
     clue: caseItem.clue,
     instruction: "Use the mini-map, then choose one state.",
     expectedLabel: target.name,
-    choices: buildAbbrChoices(caseItem.choices, pool, caseItem.targetAbbr),
+    choices: buildAbbrChoices(caseItem.choices, session.pool, caseItem.targetAbbr),
     correction: caseItem.correction || `${target.name} is the state that matches the map clue.`
   };
 }
 
-function buildEligibleHotlineQuestion(pool, regionId) {
-  const call = pickBonusCase("borderline-hotline", "calls", pool, regionId);
+function buildEligibleHotlineQuestion(session) {
+  const call = pickBonusCase("borderline-hotline", "calls", session);
   if (!call) return null;
   const target = stateByAbbr.get(call.targetAbbr);
   return {
@@ -764,13 +775,13 @@ function buildEligibleHotlineQuestion(pool, regionId) {
     line: call.line,
     audio: call.audio || null,
     expectedLabel: target.name,
-    choices: buildAbbrChoices(call.choices, pool, call.targetAbbr),
+    choices: buildAbbrChoices(call.choices, session.pool, call.targetAbbr),
     correction: `${target.name} is the border neighbor on that call.`
   };
 }
 
-function buildEligibleCapitalCallQuestion(pool, regionId) {
-  const call = pickBonusCase("capital-call-in", "calls", pool, regionId);
+function buildEligibleCapitalCallQuestion(session) {
+  const call = pickBonusCase("capital-call-in", "calls", session, { preferAudio: true });
   if (!call) return null;
   const target = stateByAbbr.get(call.targetAbbr);
   return {
@@ -784,7 +795,7 @@ function buildEligibleCapitalCallQuestion(pool, regionId) {
     line: call.line,
     audio: call.audio || null,
     expectedLabel: target.name,
-    choices: buildAbbrChoices(call.choices, pool, call.targetAbbr),
+    choices: buildAbbrChoices(call.choices, session.pool, call.targetAbbr),
     correction: `${stateByAbbr.get(call.targetAbbr).capital} belongs to ${target.name}.`
   };
 }
@@ -812,15 +823,30 @@ function buildEligibleTipQuestion(session) {
   };
 }
 
-function pickBonusCase(gameId, property, pool, regionId) {
+function pickBonusCase(gameId, property, session, options = {}) {
   const game = BONUS_GAMES.find((candidate) => candidate.id === gameId);
   if (!game) return null;
-  const poolSet = new Set(pool);
-  const eligibleCases = game[property].filter((caseItem) => {
-    if (regionId === "all") return true;
+  const poolSet = new Set(session.pool);
+  let eligibleCases = game[property].filter((caseItem) => {
+    if (session.regionId === "all") return true;
     return caseStates(caseItem).some((abbr) => poolSet.has(abbr));
   });
-  return eligibleCases.length ? randomItem(eligibleCases) : null;
+  if (options.preferAudio && eligibleCases.some((caseItem) => caseItem.audio)) {
+    eligibleCases = eligibleCases.filter((caseItem) => caseItem.audio);
+  }
+  return pickUnusedBonusCase(gameId, eligibleCases, session);
+}
+
+function pickUnusedBonusCase(gameId, cases, session) {
+  if (!cases.length) return null;
+  const freshCases = cases.filter((caseItem) => !session.usedBonusCaseKeys.includes(bonusCaseKey(gameId, caseItem)));
+  const picked = randomItem(freshCases.length ? freshCases : cases);
+  session.usedBonusCaseKeys.push(bonusCaseKey(gameId, picked));
+  return picked;
+}
+
+function bonusCaseKey(gameId, caseItem) {
+  return `${gameId}:${caseItem.targetAbbr || caseItem.destinationAbbr}:${caseItem.prompt || caseItem.title}`;
 }
 
 function buildAbbrChoices(abbrs, pool, correctAbbr) {
