@@ -539,7 +539,7 @@ function startMode(modeId) {
     streak: 0,
     maxStreak: 0,
     used: [],
-    specialSlots: modeId === "boss-round" ? buildBossSpecialSlots(mode.total) : {},
+    specialSlots: buildSpecialSlots(mode.total, modeId),
     usedSpecialTypes: [],
     usedBonusCaseKeys: [],
     answered: false,
@@ -577,7 +577,7 @@ function nextQuestion() {
 
 function generateQuestion(session) {
   const { modeId, pool, used } = session;
-  if (modeId === "boss-round" && session.specialSlots[session.index]) {
+  if (session.specialSlots[session.index]) {
     const specialType = session.specialSlots[session.index];
     const specialQuestion = specialType === "tip"
       ? buildEligibleTipQuestion(session)
@@ -637,9 +637,11 @@ function generateQuestion(session) {
   };
 }
 
-function buildBossSpecialSlots(total) {
+function buildSpecialSlots(total, modeId) {
   const slots = {};
-  const planned = ["capital-call-in", "road-trip", "weird-neighbor-court", "capital-call-in", "mini"];
+  const planned = modeId === "boss-round"
+    ? ["capital-call-in", "road-trip", "weird-neighbor-court", "capital-call-in", "mini"]
+    : ["mini", "capital-call-in", "road-trip", "weird-neighbor-court", "tip"];
   Array.from({ length: Math.floor(total / 4) }, (_, index) => (index + 1) * 4).forEach((slot, index) => {
     slots[slot] = planned[index] || "mini";
   });
