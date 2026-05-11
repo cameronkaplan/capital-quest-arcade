@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Capital Quest Arcade</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <h1>Capital Quest Arcade</h1>
+        </div>
+        <div class="hero-panel" aria-label="Player progress">
+          <div class="panel-row">
+            <span>Best streak</span>
+            <strong id="bestStreak">0</strong>
+          </div>
+          <div class="panel-row">
+            <span>Weak spots</span>
+            <strong id="weakCount">0</strong>
+          </div>
+          <button id="soundToggle" class="utility-button" type="button">Sound: On</button>
+        </div>
+      </header>
+
+      <main>
+        <section id="homeScreen" class="screen active" aria-labelledby="homeTitle">
+          <div class="screen-heading">
+            <div>
+              <p class="section-label">Choose a map mission</p>
+              <h2 id="homeTitle">Start with a region</h2>
+            </div>
+            <button id="openEditor" class="utility-button" type="button">Parent setup</button>
+          </div>
+          <div id="regionGrid" class="region-grid" aria-live="polite"></div>
+        </section>
+
+        <section id="modeScreen" class="screen" aria-labelledby="modeTitle" hidden>
+          <div class="screen-heading">
+            <div>
+              <p id="regionStatus" class="section-label"></p>
+              <h2 id="modeTitle">Pick a game mode</h2>
+            </div>
+            <button id="backHome" class="utility-button" type="button">Back to regions</button>
+          </div>
+          <div id="modeGrid" class="mode-grid"></div>
+        </section>
+
+        <section id="gameScreen" class="screen game-screen" aria-labelledby="gameTitle" hidden>
+          <div class="game-topbar">
+            <button id="backModes" class="utility-button" type="button">Modes</button>
+            <div>
+              <p id="gameRegion" class="section-label"></p>
+              <h2 id="gameTitle">Map mission</h2>
+            </div>
+            <button id="resetProgress" class="utility-button danger" type="button">Reset progress</button>
+          </div>
+
+          <div class="game-layout">
+            <section class="map-console" aria-label="United States map">
+              <div class="map-header">
+                <span id="sessionMeter">Question 1 of 10</span>
+                <span id="streakPill">Streak 0</span>
+                <span id="scorePill">Score 0</span>
+              </div>
+              <div id="mapStage" class="map-stage">
+                <div class="loading-note">Loading Census map...</div>
+              </div>
+            </section>
+
+            <section class="quiz-console" aria-live="polite">
+              <p id="modeBadge" class="mode-badge"></p>
+              <h3 id="questionPrompt">Choose a mode to begin.</h3>
+              <div id="answerArea" class="answer-area"></div>
+              <div id="feedbackPanel" class="feedback-panel" hidden>
+                <p id="feedbackTitle" class="feedback-title"></p>
+                <p id="feedbackText"></p>
+                <div id="mnemonicCard" class="mnemonic-card" hidden>
+                  <p class="mnemonic-label">Mnemonic rescue</p>
+                  <p id="mnemonicText"></p>
+                  <p id="mnemonicSource" class="mnemonic-source"></p>
+                </div>
+                <button id="nextQuestion" class="primary-button" type="button" hidden>Next</button>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section id="editorScreen" class="screen editor-screen" aria-labelledby="editorTitle" hidden>
+          <div class="screen-heading">
+            <div>
+              <p class="section-label">Parent setup</p>
+              <h2 id="editorTitle">Edit region lists</h2>
+            </div>
+            <button id="closeEditor" class="utility-button" type="button">Back</button>
+          </div>
+          <p class="editor-help">Use two-letter state codes. Keep each state in exactly one region. The All tile is built automatically.</p>
+          <textarea id="regionEditor" spellcheck="false" rows="9" aria-label="Editable region state lists"></textarea>
+          <div class="editor-actions">
+            <button id="saveRegions" class="primary-button" type="button">Save regions</button>
+            <button id="restoreRegions" class="utility-button" type="button">Restore defaults</button>
+          </div>
+          <p id="editorMessage" class="editor-message" role="status"></p>
+        </section>
+      </main>
+
+      <footer class="source-footer">
+        <span>Capital data: Britannica.</span>
+        <span>Map geometry: U.S. Census cartographic boundary files.</span>
+        <span>Class regions: Gimkit links supplied by parent.</span>
+      </footer>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
