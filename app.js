@@ -319,6 +319,7 @@ let regionPacks = loadRegionPacks();
 let progress = loadProgress();
 let geoData = null;
 let audioContext = null;
+const CORRECT_COACH_DELAY_MS = 7000;
 
 const appState = {
   currentScreen: "home",
@@ -328,7 +329,8 @@ const appState = {
   currentQuestion: null,
   driveData: null,
   courtIntroKey: null,
-  lastClickedAbbr: null
+  lastClickedAbbr: null,
+  advanceTimer: null
 };
 
 const els = {};
@@ -1425,6 +1427,7 @@ function showMapCoach(kind, title, text, state, showNext, options = {}) {
   const panel = document.createElement("div");
   panel.className = `map-coach ${kind}`;
   panel.classList.add(mapCoachPlacement(state));
+  panel.dataset.advanceOnDismiss = options.advanceOnDismiss ? "true" : "false";
   const help = state ? getCapitalHelp(state.abbr) : null;
   const hasMnemonic = Object.prototype.hasOwnProperty.call(options, "mnemonic");
   const hasFact = Object.prototype.hasOwnProperty.call(options, "fact");
@@ -1440,14 +1443,35 @@ function showMapCoach(kind, title, text, state, showNext, options = {}) {
   `;
   els.mapStage.appendChild(panel);
   const closeButton = panel.querySelector(".map-coach-close");
-  if (closeButton) closeButton.addEventListener("click", removeMapCoach);
+  if (closeButton) closeButton.addEventListener("click", dismissMapCoach);
   const nextButton = panel.querySelector(".map-coach-next");
-  if (nextButton) nextButton.addEventListener("click", nextQuestion);
+  if (nextButton) {
+    nextButton.addEventListener("click", () => {
+      clearAdvanceTimer();
+      nextQuestion();
+    });
+  }
 }
 
 function removeMapCoach() {
   const coach = els.mapStage.querySelector(".map-coach");
   if (coach) coach.remove();
+}
+
+function dismissMapCoach() {
+  const coach = els.mapStage.querySelector(".map-coach");
+  const shouldAdvance = coach && coach.dataset.advanceOnDismiss === "true";
+  removeMapCoach();
+  if (shouldAdvance) {
+    clearAdvanceTimer();
+    nextQuestion();
+  }
+}
+
+function clearAdvanceTimer() {
+  if (!appState.advanceTimer) return;
+  window.clearTimeout(appState.advanceTimer);
+  appState.advanceTimer = null;
 }
 
 function mapCoachPlacement(state) {
@@ -1948,9 +1972,11 @@ function completeCorrect(title, text, closeEnough = false) {
   renderMap();
   showFeedback(closeEnough ? "close" : "good", title, text, question.targetAbbr, closeEnough);
   if (!closeEnough) {
-    window.setTimeout(() => {
+    clearAdvanceTimer();
+    appState.advanceTimer = window.setTimeout(() => {
+      appState.advanceTimer = null;
       if (appState.session === session) nextQuestion();
-    }, 2600);
+    }, CORRECT_COACH_DELAY_MS);
   }
   saveProgress();
 }
@@ -1973,7 +1999,11 @@ function showFeedback(kind, title, text, abbr, showNext, options = {}) {
   const useMapCoach = appState.currentQuestion && !isInterruptionQuestion(appState.currentQuestion);
   if (useMapCoach) {
     els.feedbackPanel.hidden = true;
-    const coachOptions = buildCoachOptions(appState.currentQuestion, state, { ...options, feedbackKind: kind });
+    const coachOptions = buildCoachOptions(appState.currentQuestion, state, {
+      ...options,
+      advanceOnDismiss: kind === "good" && !showNext,
+      feedbackKind: kind
+    });
     showMapCoach(kind, title, text, state, showNext, coachOptions);
   } else {
     els.feedbackPanel.hidden = false;
@@ -1995,6 +2025,7 @@ function buildCoachOptions(question, state, options) {
   if (!state) return options;
   if (options.stateOnly) {
     return {
+      ...options,
       mnemonic: getStateReminder(state.abbr),
       fact: ""
     };
@@ -2002,12 +2033,14 @@ function buildCoachOptions(question, state, options) {
   if (options.capitalOnly || isCapitalQuestion(question)) {
     const help = getCapitalHelp(state.abbr);
     return {
+      ...options,
       mnemonic: help.mnemonic,
       fact: options.capitalOnly && kindIsTryOnly(options) ? "" : help.fact
     };
   }
   if (options.feedbackKind === "try" || options.feedbackKind === "miss") {
     return {
+      ...options,
       mnemonic: getStateReminder(state.abbr),
       fact: ""
     };
@@ -2047,6 +2080,7 @@ function getStateReminder(abbr, fallback) {
 }
 
 function clearFeedback() {
+  clearAdvanceTimer();
   removeMapCoach();
   els.feedbackPanel.hidden = true;
   els.feedbackPanel.className = "feedback-panel";
