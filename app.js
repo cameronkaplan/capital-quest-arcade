@@ -117,12 +117,12 @@ const DEFAULT_REGION_PACKS = [
 ];
 
 const MODES = [
-  { id: "boss-round", label: "Play", title: "Boss Round", group: "default", description: "A mixed arcade round with map questions, capitals, typing, Road Trips, and bonus cases.", total: 12 },
-  { id: "find-state", label: "Find the State", description: "The whole map appears. Click the state named in the prompt.", total: 10 },
-  { id: "capital-beacon", label: "Capital Beacon", description: "A capital appears. Click the state that owns it.", total: 10 },
-  { id: "capital-choice", label: "Capital Choice", description: "Pick the capital from four choices.", total: 10 },
-  { id: "type-dash", label: "Type Dash", description: "Type states or capitals with forgiving spelling help.", total: 10 },
-  { id: "weak-spots", label: "Weak Spots", description: "Practice the states that have been missed or answered slowly.", total: 10 }
+  { id: "boss-round", label: "Play", title: "Boss Round", group: "default", description: "A mixed arcade round with map questions, capitals, typing, Road Trips, and bonus cases.", total: 20 },
+  { id: "find-state", label: "Find the State", description: "The whole map appears. Click the state named in the prompt.", total: 20 },
+  { id: "capital-beacon", label: "Capital Beacon", description: "A capital appears. Click the state that owns it.", total: 20 },
+  { id: "capital-choice", label: "Capital Choice", description: "Pick the capital from four choices.", total: 20 },
+  { id: "type-dash", label: "Type Dash", description: "Type states or capitals with forgiving spelling help.", total: 20 },
+  { id: "weak-spots", label: "Weak Spots", description: "Practice the states that have been missed or answered slowly.", total: 20 }
 ];
 
 const BONUS_GAMES = [
@@ -227,14 +227,15 @@ const BONUS_GAMES = [
       { targetAbbr: "IN", contextAbbrs: ["IN", "IL", "OH"], caller: "I-State emergency", line: "Indianapolis calling. I am the Indiana one because my name starts with Indiana and then keeps going until it becomes Indianapolis.", prompt: "Indianapolis is the capital of which state?", choices: ["IN", "IL", "OH", "IA"] },
       { targetAbbr: "IA", contextAbbrs: ["IA", "MO", "MN"], caller: "I-State emergency", line: "Des Moines here. I owe ya an answer: Iowa. Coins, Moines, I owe ya. Please file that under weird but useful.", prompt: "Des Moines is the capital of which state?", choices: ["IA", "IL", "IN", "MN"] },
       { targetAbbr: "ND", contextAbbrs: ["ND", "SD", "MN"], caller: "Dakota capital twin", line: "Bismarck calling from North Dakota. I am the upper Dakota, and my capital sounds like a very serious history teacher.", prompt: "Bismarck is the capital of which Dakota?", choices: ["ND", "SD", "NE", "KS"] },
-      { targetAbbr: "SD", contextAbbrs: ["SD", "ND", "NE"], caller: "Dakota capital twin", line: "Pierre here, calling from South Dakota. Yes, I sound fancy. No, I am not in France. I am the lower Dakota.", prompt: "Pierre is the capital of which Dakota?", choices: ["SD", "ND", "NE", "KS"] },
+      { targetAbbr: "SD", contextAbbrs: ["SD", "ND", "NE"], caller: "Dakota capital twin", line: "Actually, we just pronounce it peer. Not the French way. Remember to put your coat on when you head south to the pier.", prompt: "Pierre is the capital of which Dakota?", choices: ["SD", "ND", "NE", "KS"], audio: "assets/audio/capital-piere-south-dakota.mp3" },
       { targetAbbr: "MI", contextAbbrs: ["MI", "WI", "MN"], caller: "Great Lakes lost and found", line: "Lansing calling from Michigan. Think of the mitten landing in Lansing, then stop sending me to Detroit.", prompt: "Lansing is the capital of which Great Lakes state?", choices: ["MI", "WI", "MN", "IL"] },
-      { targetAbbr: "WI", contextAbbrs: ["WI", "MI", "MN"], caller: "Great Lakes lost and found", line: "Madison calling from Wisconsin. I am the cheese-wedge state getting mad until you put Madison in the right place.", prompt: "Madison is the capital of which state?", choices: ["WI", "MI", "MN", "IA"] },
+      { targetAbbr: "WI", contextAbbrs: ["WI", "MI", "MN"], caller: "Madison hotline", line: "Oh hey there. You betcha. I'm callin' from Madison. We've got lakes, a big university, and plastic pink flamingos are our official city bird. Wishin' ya knew what state I'm in? Don't be mad, son.", prompt: "Madison is the capital of which state?", choices: ["WI", "MI", "MN", "IA"], audio: "assets/audio/capital-madison-wisconsin.mp3" },
       { targetAbbr: "MN", contextAbbrs: ["MN", "WI", "IA"], caller: "Great Lakes lost and found", line: "Saint Paul calling from Minnesota. Mini sodas for Saint Paul: Minnesota, Saint Paul. Weird order, useful memory.", prompt: "Saint Paul is the capital of which state?", choices: ["MN", "WI", "IA", "MI"] },
       { targetAbbr: "KS", contextAbbrs: ["KS", "NE", "OK"], caller: "Rectangle capital office", line: "Topeka here. Kansas went to peek at Dorothy's house, so the flat can state gets Topeka.", prompt: "Topeka is the capital of which rectangle-ish state?", choices: ["KS", "NE", "OK", "MO"] },
       { targetAbbr: "NE", contextAbbrs: ["NE", "KS", "SD"], caller: "Rectangle capital office", line: "Lincoln calling from Nebraska. Nebraska is above Kansas, and Lincoln is where this rectangle filed its paperwork.", prompt: "Lincoln is the capital of which state?", choices: ["NE", "KS", "SD", "ND"] },
       { targetAbbr: "OH", contextAbbrs: ["OH", "IN", "MI"], caller: "Not St. Louis desk", line: "Columbus calling from Ohio. Oh, hi, Mr. Columbus. That is the whole trick, and honestly it does the job.", prompt: "Columbus is the capital of which state?", choices: ["OH", "MO", "IN", "MI"] },
-      { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Jefferson City calling from Missouri. St. Louis is famous, but I am the capital. Jefferson City gets the Missouri paperwork.", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"] }
+      { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Jefferson City calling from Missouri. St. Louis is famous, but I am the capital. Jefferson City gets the Missouri paperwork.", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"] },
+      { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Cheyenne calling from the wide open range. If you are shy, Anne, ride out to Wyoming and say it fast: Cheyenne, Wyoming.", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" }
     ]
   }
 ];
@@ -532,7 +533,7 @@ function startMode(modeId) {
     modeId,
     regionId: region.id,
     pool,
-    total: Math.min(mode.total, Math.max(1, pool.length === 0 ? region.states.length : pool.length)),
+    total: mode.total,
     index: 0,
     correct: 0,
     streak: 0,
@@ -635,14 +636,10 @@ function generateQuestion(session) {
 }
 
 function buildBossSpecialSlots(total) {
-  const usableIndexes = shuffle(Array.from({ length: total }, (_, index) => index + 1).filter((value) => value >= 3 && value <= total - 1));
   const slots = {};
-  const miniCount = total >= 10 ? 2 : 1;
-  usableIndexes.slice(0, miniCount).forEach((index) => {
-    slots[index] = "mini";
+  Array.from({ length: Math.floor(total / 4) }, (_, index) => (index + 1) * 4).forEach((slot, index) => {
+    slots[slot] = index % 3 === 1 ? "tip" : "mini";
   });
-  const remaining = usableIndexes.filter((index) => !slots[index]);
-  if (remaining.length) slots[remaining[0]] = "tip";
   return slots;
 }
 
@@ -785,6 +782,7 @@ function buildEligibleCapitalCallQuestion(pool, regionId) {
     screenTitle: "Capital Call-In",
     caller: call.caller,
     line: call.line,
+    audio: call.audio || null,
     expectedLabel: target.name,
     choices: buildAbbrChoices(call.choices, pool, call.targetAbbr),
     correction: `${stateByAbbr.get(call.targetAbbr).capital} belongs to ${target.name}.`
