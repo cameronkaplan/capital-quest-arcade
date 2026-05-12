@@ -266,7 +266,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Utah
 - Format: State calls, name the capital.
-- Caller: Salty chef line
+- Caller: Utah
 - Audio line: "Okay— [beat] so you talk about salt like city chefs do. [pause] But is it local? [short pause] Is it flaky? [beat] Does it have a story?."
 - Prompt: "Which capital belongs to Utah?"
 
@@ -283,10 +283,10 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 - Prompt: "Which capital belongs to Virginia?"
 
 ### Washington
-- Format: State calls, name the capital.
-- Caller: Olympic laundry desk
-- Audio line: "Washington says it washes tons at the Olympics. Olympic points lead to the capital."
-- Prompt: "Which capital belongs to Washington?"
+- Format: Capital calls, name the state.
+- Caller: Our Nation's Founder
+- Audio line: "George Washington here— [beat] reporting from the Olympia games. [pause] I came for liberty, stayed for the medals."
+- Prompt: "Olympia is the capital of which state?"
 
 ### West Virginia
 - Format: State calls, name the capital.
