@@ -484,7 +484,7 @@ const BONUS_GAMES = [
       { targetAbbr: "NE", contextAbbrs: ["NE", "KS", "SD"], caller: "Statue of the President", line: "President Lincoln? Yes sir. I built him a statue with knees of brass.", prompt: "Lincoln is the capital of which state?", choices: ["NE", "KS", "SD", "ND"], audio: "assets/audio/capital-lincoln-nebraska.mp3" },
       { targetAbbr: "OH", contextAbbrs: ["OH", "IN", "MI"], caller: "Columbus desk", line: "Front desk, Columbus speaking. Oh, hi! Oh, hi again!", prompt: "Columbus is the capital of which state?", choices: ["OH", "MO", "IN", "MI"], audio: "assets/audio/capital-columbus-ohio.mp3" },
       { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Hi there, this is Miss Ouri callin'. Me and Mr. Jefferson went down to the city. Jefferson City, that's where we landed. But what state?", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"], audio: "assets/audio/capital-jefferson-city-missouri.mp3" },
-      { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Cheyenne calling from the wide open range. If you are shy, Anne, ride out to Wyoming and say it fast: Cheyenne, Wyoming.", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" },
+      { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Shy Anne is calling from Cheyenne. Why oh why? And what state is she in?", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" },
       { targetAbbr: "AL", answerKind: "capital", contextAbbrs: ["AL", "MS", "GA"], caller: "Mountain-gum dispatch", line: "Alabama is on the line with Al on a mountain of gum. The capital sounds like Monty's gum mountain.", prompt: "Which capital belongs to Alabama?", choices: ["AL", "MS", "GA", "TN"] },
       { targetAbbr: "AZ", answerKind: "capital", contextAbbrs: ["AZ", "NM", "UT"], caller: "Desert bird desk", line: "Arizona says a fiery bird keeps rising out of the desert. That bird is also the capital clue.", prompt: "Which capital belongs to Arizona?", choices: ["AZ", "NM", "UT", "CO"] },
       { targetAbbr: "AR", answerKind: "capital", contextAbbrs: ["AR", "LA", "MS"], caller: "Tiny boulder bureau", line: "Arkansas found a very small boulder in its pocket. The pocket rock is the capital clue.", prompt: "Which capital belongs to Arkansas?", choices: ["AR", "LA", "MS", "OK"] },
@@ -1065,6 +1065,10 @@ function buildEligibleSquareQuestion(session) {
 function buildEligibleHotlineQuestion(session) {
   const call = pickBonusCase("borderline-hotline", "calls", session);
   if (!call) return null;
+  return buildHotlineQuestionFromCall(call, session);
+}
+
+function buildHotlineQuestionFromCall(call, session) {
   const target = stateByAbbr.get(call.targetAbbr);
   return {
     kind: "hotline",
@@ -1083,20 +1087,31 @@ function buildEligibleHotlineQuestion(session) {
 }
 
 function buildEligibleCallBreakQuestion(session) {
-  const candidates = [];
-  if (hasEligibleBonusCase("capital-call-in", "calls", session, { preferAudio: true })) candidates.push("capital-call-in");
-  if (hasEligibleBonusCase("borderline-hotline", "calls", session)) candidates.push("borderline-hotline");
+  const capitalCalls = getEligibleBonusCases("capital-call-in", "calls", session, { preferAudio: true }).map((call) => ({
+    gameId: "capital-call-in",
+    caseItem: call,
+    build: () => buildCapitalCallQuestionFromCall(call, session)
+  }));
+  const hotlineCalls = getEligibleBonusCases("borderline-hotline", "calls", session).map((call) => ({
+    gameId: "borderline-hotline",
+    caseItem: call,
+    build: () => buildHotlineQuestionFromCall(call, session)
+  }));
+  const candidates = [...capitalCalls, ...hotlineCalls];
   if (!candidates.length) return null;
-  const freshTypes = candidates.filter((type) => !session.usedSpecialTypes.includes(type));
-  const pickedType = randomItem(freshTypes.length ? freshTypes : candidates);
-  return pickedType === "borderline-hotline"
-    ? buildEligibleHotlineQuestion(session)
-    : buildEligibleCapitalCallQuestion(session);
+  const freshCandidates = candidates.filter((candidate) => !session.usedBonusCaseKeys.includes(bonusCaseKey(candidate.gameId, candidate.caseItem)));
+  const picked = randomItem(freshCandidates.length ? freshCandidates : candidates);
+  session.usedBonusCaseKeys.push(bonusCaseKey(picked.gameId, picked.caseItem));
+  return picked.build();
 }
 
 function buildEligibleCapitalCallQuestion(session) {
   const call = pickBonusCase("capital-call-in", "calls", session, { preferAudio: true });
   if (!call) return null;
+  return buildCapitalCallQuestionFromCall(call, session);
+}
+
+function buildCapitalCallQuestionFromCall(call, session) {
   const target = stateByAbbr.get(call.targetAbbr);
   const answerKind = call.answerKind === "capital" ? "capital" : "state";
   return {
