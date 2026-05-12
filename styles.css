@@ -292,6 +292,75 @@ h3 {
   color: var(--paper);
 }
 
+.mini-bumper {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: grid;
+  place-items: center;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(0deg, rgba(255, 248, 223, 0.12) 0 2px, transparent 2px 7px),
+    rgba(24, 36, 32, 0.64);
+  animation: bumperFade 1200ms ease both;
+}
+
+.mini-bumper-card {
+  position: relative;
+  display: grid;
+  gap: 8px;
+  min-width: min(78vw, 560px);
+  border: 5px solid #fff8df;
+  padding: clamp(20px, 5vw, 42px);
+  background: #cf4f3d;
+  color: #fff8df;
+  box-shadow: 12px 12px 0 #f2ca4b, -8px -8px 0 #1d1914;
+  text-align: center;
+  text-transform: uppercase;
+  transform: rotate(-2deg);
+  animation: bumperSlam 720ms cubic-bezier(0.16, 1.25, 0.32, 1) both;
+}
+
+.mini-bumper-kicker {
+  font-family: "Courier New", monospace;
+  font-size: clamp(0.82rem, 2.1vw, 1.05rem);
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.mini-bumper-card strong {
+  font-size: clamp(2rem, 8vw, 4.8rem);
+  line-height: 0.9;
+  text-shadow: 4px 4px 0 #1d1914;
+}
+
+.mini-bumper-flash {
+  position: absolute;
+  inset: -18px;
+  border: 4px dashed #f2ca4b;
+  animation: bumperFlash 420ms steps(2, end) 3;
+}
+
+.bumper-drive .mini-bumper-card {
+  background: #285f4d;
+}
+
+.bumper-hotline .mini-bumper-card {
+  background: #2f5f8f;
+}
+
+.bumper-call-in .mini-bumper-card {
+  background: #57428a;
+}
+
+.bumper-square .mini-bumper-card {
+  background: #b96d2f;
+}
+
+.bumper-tip .mini-bumper-card {
+  background: #2f2418;
+}
+
 .game-screen.court-mode .game-topbar {
   border-bottom: 3px solid #f2ca4b;
   padding-bottom: 14px;
@@ -827,6 +896,15 @@ h3 {
   cursor: default;
 }
 
+.choice-button:disabled,
+.primary-button:disabled,
+.utility-button:disabled {
+  opacity: 0.58;
+  cursor: wait;
+  transform: none;
+  box-shadow: 0 2px 0 rgba(24, 36, 32, 0.16);
+}
+
 .arcade-panel,
 .tip-panel {
   position: relative;
@@ -1303,6 +1381,33 @@ h3 {
     opacity: 1;
     transform: translateY(0) rotate(0) scale(1);
   }
+}
+
+@keyframes bumperFade {
+  0% { opacity: 0; }
+  12% { opacity: 1; }
+  82% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes bumperSlam {
+  0% {
+    opacity: 0;
+    transform: translateY(-44px) rotate(-8deg) scale(1.16);
+  }
+  62% {
+    opacity: 1;
+    transform: translateY(8px) rotate(2deg) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotate(-2deg) scale(1);
+  }
+}
+
+@keyframes bumperFlash {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.28; }
 }
 
 @keyframes gavelSlam {

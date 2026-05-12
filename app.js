@@ -1,5 +1,6 @@
 const STORAGE_KEY = "capitalQuestArcade.v1";
 const REGION_OVERRIDE_KEY = "capitalQuestArcade.regions.v1";
+const LEGACY_REGION_SIGNATURE_OK_NORTHEAST = "west:WA,WY,CA,HI,MT,NV,UT,AK,ID,OR,NM,AZ,CO|midwest:OH,IN,IL,MI,WI,MO,IA,MN,KS,NE,SD,ND|southeast:GA,FL,SC,LA,TN,WV,NC,MS,VA,KY,AR,AL,TX|northeast:CT,DE,ME,MD,MA,NH,NJ,NY,OK,PA,RI,VT";
 
 const STATE_DATA = [
   { abbr: "AL", name: "Alabama", capital: "Montgomery", aliases: [], capitalAliases: [], mnemonic: { text: "A source-backed memory image uses Al on a mountain of gum to remember Montgomery.", source: "How to Memorize state capitals", type: "source" } },
@@ -112,8 +113,8 @@ const PRAISE_LINES = ["Good job!", "Great!", "Amazing!", "Nice!", "You got it!",
 const DEFAULT_REGION_PACKS = [
   { id: "west", label: "West", fullLabel: "West Recovery", status: "Class set", states: ["WA", "WY", "CA", "HI", "MT", "NV", "UT", "AK", "ID", "OR", "NM", "AZ", "CO"] },
   { id: "midwest", label: "Midwest", fullLabel: "Midwest Prep", status: "Class set", states: ["OH", "IN", "IL", "MI", "WI", "MO", "IA", "MN", "KS", "NE", "SD", "ND"] },
-  { id: "southeast", label: "Southeast", fullLabel: "Southeast Prep", status: "Class set", states: ["GA", "FL", "SC", "LA", "TN", "WV", "NC", "MS", "VA", "KY", "AR", "AL", "TX"] },
-  { id: "northeast", label: "Northeast", fullLabel: "Northeast Preview", status: "Preview", states: ["CT", "DE", "ME", "MD", "MA", "NH", "NJ", "NY", "OK", "PA", "RI", "VT"] }
+  { id: "southeast", label: "Southeast", fullLabel: "Southeast Prep", status: "Class set", states: ["GA", "FL", "SC", "LA", "TN", "WV", "NC", "MS", "VA", "KY", "AR", "AL", "TX", "OK"] },
+  { id: "northeast", label: "Northeast", fullLabel: "Northeast Preview", status: "Preview", states: ["CT", "DE", "ME", "MD", "MA", "NH", "NJ", "NY", "PA", "RI", "VT"] }
 ];
 
 const MODES = [
@@ -131,12 +132,46 @@ const BONUS_GAMES = [
     label: "Road Trip",
     reward: 1,
     routes: [
-      { originAbbr: "TX", destinationAbbr: "AZ", avoidAbbrs: ["NM"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Texas to Arizona without touching New Mexico." },
       { originAbbr: "CA", destinationAbbr: "WA", avoidAbbrs: ["OR"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from California to Washington without touching Oregon." },
-      { originAbbr: "AL", destinationAbbr: "GA", avoidAbbrs: [], checkpointAbbrs: ["MS"], allowedAbbrs: [], prompt: "Drive from Alabama to Mississippi, then Georgia." },
+      { originAbbr: "WA", destinationAbbr: "CA", avoidAbbrs: [], checkpointAbbrs: ["OR"], allowedAbbrs: [], prompt: "Drive from Washington to Oregon, then California." },
+      { originAbbr: "AZ", destinationAbbr: "CO", avoidAbbrs: [], checkpointAbbrs: ["UT"], allowedAbbrs: [], prompt: "Drive from Arizona to Utah, then Colorado." },
       { originAbbr: "CO", destinationAbbr: "MT", avoidAbbrs: ["WY"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Colorado to Montana without touching Wyoming." },
+      { originAbbr: "NV", destinationAbbr: "NM", avoidAbbrs: ["AZ"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Nevada to New Mexico. Avoid Arizona." },
+      { originAbbr: "ID", destinationAbbr: "OR", avoidAbbrs: ["MT"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Idaho to Oregon. Montana is road closed." },
+      { originAbbr: "AK", destinationAbbr: "HI", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Island-hop from Alaska to Hawaii." },
+      { originAbbr: "WY", destinationAbbr: "CO", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Wyoming to Colorado." },
+      { originAbbr: "MT", destinationAbbr: "ID", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Montana to Idaho." },
+      { originAbbr: "NM", destinationAbbr: "AZ", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from New Mexico to Arizona." },
+      { originAbbr: "ND", destinationAbbr: "SD", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from North Dakota to South Dakota." },
+      { originAbbr: "MN", destinationAbbr: "MO", avoidAbbrs: [], checkpointAbbrs: ["IA"], allowedAbbrs: [], prompt: "Drive from Minnesota to Iowa, then Missouri." },
+      { originAbbr: "OH", destinationAbbr: "IL", avoidAbbrs: [], checkpointAbbrs: ["IN"], allowedAbbrs: [], prompt: "Drive from Ohio to Indiana, then Illinois." },
+      { originAbbr: "KS", destinationAbbr: "ND", avoidAbbrs: ["MO"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Kansas to North Dakota. Avoid Missouri." },
+      { originAbbr: "WI", destinationAbbr: "NE", avoidAbbrs: ["IL"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Wisconsin to Nebraska. Illinois is road closed." },
+      { originAbbr: "MI", destinationAbbr: "KS", avoidAbbrs: ["OH"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Michigan to Kansas. Avoid Ohio." },
+      { originAbbr: "MO", destinationAbbr: "WI", avoidAbbrs: ["IL"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Missouri to Wisconsin. Illinois is closed." },
+      { originAbbr: "NE", destinationAbbr: "OH", avoidAbbrs: ["MO"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Nebraska to Ohio. Skip Missouri." },
+      { originAbbr: "IN", destinationAbbr: "MN", avoidAbbrs: ["MI"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Indiana to Minnesota. No Michigan detour." },
+      { originAbbr: "SD", destinationAbbr: "IL", avoidAbbrs: [], checkpointAbbrs: ["IA"], allowedAbbrs: [], prompt: "Drive from South Dakota to Iowa, then Illinois." },
+      { originAbbr: "AL", destinationAbbr: "GA", avoidAbbrs: [], checkpointAbbrs: ["MS"], allowedAbbrs: [], prompt: "Drive from Alabama to Mississippi, then Georgia." },
+      { originAbbr: "TX", destinationAbbr: "AZ", avoidAbbrs: ["NM"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Texas to Arizona without touching New Mexico." },
+      { originAbbr: "FL", destinationAbbr: "VA", avoidAbbrs: ["AL"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Florida to Virginia. Avoid Alabama." },
+      { originAbbr: "LA", destinationAbbr: "TN", avoidAbbrs: [], checkpointAbbrs: ["MS"], allowedAbbrs: [], prompt: "Drive from Louisiana to Mississippi, then Tennessee." },
+      { originAbbr: "WV", destinationAbbr: "FL", avoidAbbrs: ["TN"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from West Virginia to Florida. Avoid Tennessee." },
+      { originAbbr: "OK", destinationAbbr: "AL", avoidAbbrs: ["TX"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Oklahoma to Alabama. Do not dip into Texas." },
+      { originAbbr: "KY", destinationAbbr: "SC", avoidAbbrs: ["WV"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Kentucky to South Carolina. West Virginia is a decoy." },
+      { originAbbr: "NC", destinationAbbr: "LA", avoidAbbrs: ["FL"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from North Carolina to Louisiana. Florida is closed." },
+      { originAbbr: "AR", destinationAbbr: "VA", avoidAbbrs: ["TX"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Arkansas to Virginia. Texas is not on the docket." },
+      { originAbbr: "SC", destinationAbbr: "TX", avoidAbbrs: ["FL"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from South Carolina to Texas. Skip Florida." },
       { originAbbr: "NH", destinationAbbr: "VT", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from New Hampshire to Vermont." },
-      { originAbbr: "ND", destinationAbbr: "SD", avoidAbbrs: [], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from North Dakota to South Dakota." }
+      { originAbbr: "ME", destinationAbbr: "RI", avoidAbbrs: [], checkpointAbbrs: ["NH"], allowedAbbrs: [], prompt: "Drive from Maine to New Hampshire, then Rhode Island." },
+      { originAbbr: "NY", destinationAbbr: "DE", avoidAbbrs: [], checkpointAbbrs: ["NJ"], allowedAbbrs: [], prompt: "Drive from New York to New Jersey, then Delaware." },
+      { originAbbr: "VT", destinationAbbr: "MD", avoidAbbrs: [], checkpointAbbrs: ["NY"], allowedAbbrs: [], prompt: "Drive from Vermont to New York, then Maryland." },
+      { originAbbr: "CT", destinationAbbr: "PA", avoidAbbrs: [], checkpointAbbrs: ["NY"], allowedAbbrs: [], prompt: "Drive from Connecticut to New York, then Pennsylvania." },
+      { originAbbr: "DE", destinationAbbr: "MA", avoidAbbrs: ["PA"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Delaware to Massachusetts. Pennsylvania is off-limits." },
+      { originAbbr: "RI", destinationAbbr: "ME", avoidAbbrs: [], checkpointAbbrs: ["MA"], allowedAbbrs: [], prompt: "Drive from Rhode Island to Massachusetts, then Maine." },
+      { originAbbr: "NJ", destinationAbbr: "VT", avoidAbbrs: [], checkpointAbbrs: ["NY"], allowedAbbrs: [], prompt: "Drive from New Jersey to New York, then Vermont." },
+      { originAbbr: "PA", destinationAbbr: "CT", avoidAbbrs: [], checkpointAbbrs: ["NY"], allowedAbbrs: [], prompt: "Drive from Pennsylvania to New York, then Connecticut." },
+      { originAbbr: "MA", destinationAbbr: "DE", avoidAbbrs: ["RI"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from Massachusetts to Delaware. Rhode Island is a tiny wrong turn." }
     ]
   },
   {
@@ -146,7 +181,7 @@ const BONUS_GAMES = [
     stinger: "assets/audio/weird-neighbor-court-stinger.mp3",
     cases: [
       {
-        title: "California v. Oregon",
+        title: "The Coastal Roadblock",
         plaintiffAbbr: "CA",
         defendantAbbr: "OR",
         contextAbbrs: ["CA", "OR", "WA"],
@@ -154,7 +189,7 @@ const BONUS_GAMES = [
         prompt: "Which neighbor is in the way?"
       },
       {
-        title: "Alabama v. Mississippi",
+        title: "The Mixed-Up Sidekick",
         plaintiffAbbr: "AL",
         defendantAbbr: "MS",
         contextAbbrs: ["AL", "MS", "GA"],
@@ -162,7 +197,7 @@ const BONUS_GAMES = [
         prompt: "Which neighbor is Alabama complaining about?"
       },
       {
-        title: "New Hampshire v. Vermont",
+        title: "The Look-Alike Neighbor",
         plaintiffAbbr: "NH",
         defendantAbbr: "VT",
         contextAbbrs: ["NH", "VT", "ME"],
@@ -170,7 +205,7 @@ const BONUS_GAMES = [
         prompt: "Which state is New Hampshire's look-alike neighbor?"
       },
       {
-        title: "North Dakota v. South Dakota",
+        title: "The Lower Twin",
         plaintiffAbbr: "ND",
         defendantAbbr: "SD",
         contextAbbrs: ["ND", "SD"],
@@ -178,12 +213,228 @@ const BONUS_GAMES = [
         prompt: "Which Dakota is on trial?"
       },
       {
-        title: "Texas v. New Mexico",
+        title: "The Desert Blocker",
         plaintiffAbbr: "TX",
         defendantAbbr: "NM",
         contextAbbrs: ["TX", "NM", "AZ"],
         testimony: "Texas says, \"Your Honor, I am trying to reach Arizona, and this neighbor is standing in the way.\"",
         prompt: "Which state is blocking the trip?"
+      },
+      {
+        title: "The Lower Box Complaint",
+        plaintiffAbbr: "WY",
+        defendantAbbr: "CO",
+        contextAbbrs: ["WY", "CO", "UT"],
+        testimony: "Wyoming says, \"The box right below me keeps copying my rectangle routine.\"",
+        prompt: "Which state is the lower box?"
+      },
+      {
+        title: "The Four Corners Traffic Jam",
+        plaintiffAbbr: "AZ",
+        defendantAbbr: "UT",
+        contextAbbrs: ["AZ", "UT", "CO", "NM"],
+        testimony: "Arizona says, \"At the corner meeting, I need the neighbor directly above me before I can head toward the Rockies.\"",
+        prompt: "Which Four Corners neighbor sits above Arizona?"
+      },
+      {
+        title: "The Potato Witness",
+        plaintiffAbbr: "MT",
+        defendantAbbr: "ID",
+        contextAbbrs: ["MT", "ID", "WY"],
+        testimony: "Montana says, \"A tall, skinny neighbor is tucked along my western face.\"",
+        prompt: "Which state is tucked west of Montana?"
+      },
+      {
+        title: "The Salt Stop",
+        plaintiffAbbr: "NV",
+        defendantAbbr: "UT",
+        contextAbbrs: ["NV", "UT", "CO"],
+        testimony: "Nevada says, \"Before I can get to Colorado, I hit one salty neighbor.\"",
+        prompt: "Which salty state is between Nevada and Colorado?"
+      },
+      {
+        title: "The Island Flight Mix-Up",
+        plaintiffAbbr: "AK",
+        defendantAbbr: "HI",
+        contextAbbrs: ["AK", "HI", "WA"],
+        testimony: "Alaska says, \"The other off-map state is warm, islandy, and definitely not a road trip.\"",
+        prompt: "Which off-map island state is the witness?"
+      },
+      {
+        title: "The Upper Twin",
+        plaintiffAbbr: "SD",
+        defendantAbbr: "ND",
+        contextAbbrs: ["ND", "SD"],
+        testimony: "South Dakota says, \"I am the bottom twin. The other twin sits directly above me.\"",
+        prompt: "Which Dakota is the upper twin?"
+      },
+      {
+        title: "The I-State Pileup",
+        plaintiffAbbr: "IL",
+        defendantAbbr: "IN",
+        contextAbbrs: ["IL", "IN", "IA", "OH"],
+        testimony: "Illinois says, \"One I-state neighbor sits between me and Ohio.\"",
+        prompt: "Which I-state sits between Illinois and Ohio?"
+      },
+      {
+        title: "The Rectangle Ladder",
+        plaintiffAbbr: "NE",
+        defendantAbbr: "KS",
+        contextAbbrs: ["NE", "KS", "SD"],
+        testimony: "Nebraska says, \"The rectangle directly below me keeps blocking the bottom rung.\"",
+        prompt: "Which rectangle is directly south of Nebraska?"
+      },
+      {
+        title: "The Mitten Witness",
+        plaintiffAbbr: "MI",
+        defendantAbbr: "WI",
+        contextAbbrs: ["MI", "WI", "IL"],
+        testimony: "Michigan says, \"Across the lake, a neighbor gets mixed up in Great Lakes arguments with me.\"",
+        prompt: "Which Great Lakes neighbor is across from Michigan?"
+      },
+      {
+        title: "The River Crossing",
+        plaintiffAbbr: "MO",
+        defendantAbbr: "IA",
+        contextAbbrs: ["MO", "IA", "MN"],
+        testimony: "Missouri says, \"To head north toward Minnesota, I first cross into my neighbor above me.\"",
+        prompt: "Which state is north of Missouri?"
+      },
+      {
+        title: "The Not-St-Louis Objection",
+        plaintiffAbbr: "MO",
+        defendantAbbr: "OH",
+        contextAbbrs: ["MO", "OH", "IL", "IN"],
+        testimony: "Missouri says, \"I am tired of being mixed into another state's oh-hi memory trick.\"",
+        prompt: "Which state owns the oh-hi Columbus clue?"
+      },
+      {
+        title: "The Corn Belt Shortcut",
+        plaintiffAbbr: "KS",
+        defendantAbbr: "NE",
+        contextAbbrs: ["KS", "NE", "SD"],
+        testimony: "Kansas says, \"My route to the Dakota stack climbs through the corn rectangle above me.\"",
+        prompt: "Which state is the corn rectangle above Kansas?"
+      },
+      {
+        title: "The Great Lakes Lost Case",
+        plaintiffAbbr: "MI",
+        defendantAbbr: "WI",
+        contextAbbrs: ["MI", "WI", "MN", "IL"],
+        testimony: "Michigan says, \"One Great Lakes neighbor sits west of Lake Michigan and keeps waving from the other side.\"",
+        prompt: "Which state sits west of Lake Michigan?"
+      },
+      {
+        title: "The MAG Line",
+        plaintiffAbbr: "AL",
+        defendantAbbr: "GA",
+        contextAbbrs: ["MS", "AL", "GA"],
+        testimony: "Alabama says, \"In the M-A-G line, one neighbor comes after me going west to east.\"",
+        prompt: "Which state comes after Alabama in M-A-G?"
+      },
+      {
+        title: "The Panhandle Problem",
+        plaintiffAbbr: "FL",
+        defendantAbbr: "GA",
+        contextAbbrs: ["FL", "GA", "AL"],
+        testimony: "Florida says, \"My northern neighbor sits above me before the peninsula gets skinny.\"",
+        prompt: "Which state is north of Florida?"
+      },
+      {
+        title: "The Chef MIMAL Complaint",
+        plaintiffAbbr: "AR",
+        defendantAbbr: "LA",
+        contextAbbrs: ["AR", "LA", "MS"],
+        testimony: "Arkansas says, \"The boot at the bottom of the Chef MIMAL stack keeps kicking my map.\"",
+        prompt: "Which state is the boot under Arkansas?"
+      },
+      {
+        title: "The New Transfer",
+        plaintiffAbbr: "OK",
+        defendantAbbr: "AR",
+        contextAbbrs: ["OK", "AR", "TX"],
+        testimony: "Oklahoma says, \"I just moved into Southeast practice, and the neighbor to my east is acting surprised.\"",
+        prompt: "Which state is east of Oklahoma?"
+      },
+      {
+        title: "The Carolina Mirror",
+        plaintiffAbbr: "NC",
+        defendantAbbr: "SC",
+        contextAbbrs: ["NC", "SC", "VA"],
+        testimony: "North Carolina says, \"My mirror-name neighbor sits directly below me.\"",
+        prompt: "Which Carolina is below?"
+      },
+      {
+        title: "The Mountain Corner",
+        plaintiffAbbr: "WV",
+        defendantAbbr: "KY",
+        contextAbbrs: ["WV", "KY", "VA"],
+        testimony: "West Virginia says, \"One southern neighbor crowds my western edge before Virginia shows up.\"",
+        prompt: "Which state crowds West Virginia from the west?"
+      },
+      {
+        title: "The Tennessee Top Rail",
+        plaintiffAbbr: "MS",
+        defendantAbbr: "TN",
+        contextAbbrs: ["MS", "AL", "TN"],
+        testimony: "Mississippi says, \"A long state stretches across the top of me and my eastern neighbor.\"",
+        prompt: "Which long state is above Mississippi and Alabama?"
+      },
+      {
+        title: "The Tiny State Stack",
+        plaintiffAbbr: "RI",
+        defendantAbbr: "MA",
+        contextAbbrs: ["RI", "MA", "CT"],
+        testimony: "Rhode Island says, \"I am tiny, but one larger neighbor wraps around my north and east side.\"",
+        prompt: "Which state wraps around Rhode Island?"
+      },
+      {
+        title: "The Maine Touch Rule",
+        plaintiffAbbr: "VT",
+        defendantAbbr: "NH",
+        contextAbbrs: ["VT", "NH", "ME"],
+        testimony: "Vermont says, \"My look-alike neighbor is the one that touches Maine.\"",
+        prompt: "Which look-alike touches Maine?"
+      },
+      {
+        title: "The Jersey Bridge",
+        plaintiffAbbr: "NY",
+        defendantAbbr: "NJ",
+        contextAbbrs: ["NY", "NJ", "DE"],
+        testimony: "New York says, \"To head toward Delaware, I pass through the neighbor with the jersey clue.\"",
+        prompt: "Which state bridges New York toward Delaware?"
+      },
+      {
+        title: "The Pennsylvania Detour",
+        plaintiffAbbr: "NJ",
+        defendantAbbr: "PA",
+        contextAbbrs: ["NJ", "PA", "NY"],
+        testimony: "New Jersey says, \"If I go west, I immediately run into a big neighbor.\"",
+        prompt: "Which state is west of New Jersey?"
+      },
+      {
+        title: "The Chesapeake Shortcut",
+        plaintiffAbbr: "MD",
+        defendantAbbr: "DE",
+        contextAbbrs: ["MD", "DE", "PA"],
+        testimony: "Maryland says, \"A small coastal neighbor sits right on my eastern edge.\"",
+        prompt: "Which small state is east of Maryland?"
+      },
+      {
+        title: "The New England Ladder",
+        plaintiffAbbr: "CT",
+        defendantAbbr: "MA",
+        contextAbbrs: ["CT", "MA", "NH"],
+        testimony: "Connecticut says, \"Before the ladder reaches New Hampshire, it climbs through the state above me.\"",
+        prompt: "Which state is above Connecticut?"
+      },
+      {
+        title: "The West Look-Alike",
+        plaintiffAbbr: "NH",
+        defendantAbbr: "VT",
+        contextAbbrs: ["NH", "VT", "NY"],
+        testimony: "New Hampshire says, \"My look-alike neighbor sits to my west, which means left on the map.\"",
+        prompt: "Which look-alike is west?"
       }
     ]
   },
@@ -207,9 +458,7 @@ const BONUS_GAMES = [
     calls: [
       { targetAbbr: "VT", contextAbbrs: ["VT", "NH", "ME"], caller: "Caller 101", line: "I'm New Hampshire. I touch Maine, but my look-alike neighbor is immediately west of me.", prompt: "Who is on the line next door?", choices: ["VT", "NH", "ME", "NY"], audio: "assets/audio/hotline_nh-vt.mp3" },
       { targetAbbr: "MS", contextAbbrs: ["MS", "AL", "GA"], caller: "Caller 202", line: "I'm Alabama. Georgia is on one side, but the state on my other side gets mixed up with me all the time.", prompt: "Which neighbor is calling from the west?", choices: ["MS", "AL", "GA", "LA"], audio: "assets/audio/hotline-al-ms.mp3" },
-      { targetAbbr: "OR", contextAbbrs: ["CA", "OR", "WA"], caller: "Caller 303", line: "California wants to get to Washington on the coast, but I am standing right in the middle.", prompt: "Which state is the coastal middle?", choices: ["OR", "CA", "WA", "NV"] },
-      { targetAbbr: "NM", contextAbbrs: ["TX", "NM", "AZ"], caller: "Caller 404", line: "Texas says it can almost reach Arizona, except I am politely blocking the way.", prompt: "Which state is between Texas and Arizona?", choices: ["NM", "TX", "AZ", "OK"], audio: "assets/audio/hotline-tx-nm-az.mp3" },
-      { targetAbbr: "SD", contextAbbrs: ["ND", "SD", "NE"], caller: "Caller 505", line: "North Dakota keeps calling me the lower twin. Rude, but accurate.", prompt: "Which Dakota is below?", choices: ["SD", "ND", "NE", "KS"] }
+      { targetAbbr: "NM", contextAbbrs: ["TX", "NM", "AZ"], caller: "Caller 404", line: "Texas says it can almost reach Arizona, except I am politely blocking the way.", prompt: "Which state is between Texas and Arizona?", choices: ["NM", "TX", "AZ", "OK"], audio: "assets/audio/hotline-tx-nm-az.mp3" }
     ]
   },
   {
@@ -217,25 +466,56 @@ const BONUS_GAMES = [
     label: "Capital Call-In",
     reward: 1,
     calls: [
-      { targetAbbr: "ID", contextAbbrs: ["ID", "MT", "WY"], caller: "Boise on line one", line: "This is Boise. People keep hearing boys-see, but I need the state I belong to.", prompt: "Boise is the capital of which state?", choices: ["ID", "MT", "WY", "UT"] },
+      { targetAbbr: "ID", contextAbbrs: ["ID", "MT", "WY"], caller: "Cranky Gramps", line: "Listen here, if I'd a hoe, I'd make those boys see the right way to weed a garden. Pull from the roots, boys. The roots.", prompt: "Boise is calling from which state?", choices: ["ID", "MT", "WY", "UT"], audio: "assets/audio/capital-boise-idaho.mp3" },
       { targetAbbr: "AK", contextAbbrs: ["AK", "HI", "WA"], caller: "Juneau on line two", line: "Juneau the answer? I am cold, far northwest, and absolutely not Anchorage.", prompt: "Juneau is the capital of which state?", choices: ["AK", "HI", "WA", "OR"] },
       { targetAbbr: "CA", contextAbbrs: ["CA", "OR", "NV"], caller: "Sacramento on line three", line: "Everyone yells Los Angeles or San Francisco. I am Sacramento, asking for basic respect.", prompt: "Sacramento is the capital of which state?", choices: ["CA", "OR", "NV", "AZ"] },
       { targetAbbr: "TN", contextAbbrs: ["TN", "KY", "MS"], caller: "Nashville on line four", line: "Music City calling. I have guitars, a state capital job, and zero patience for Memphis guesses.", prompt: "Nashville is the capital of which state?", choices: ["TN", "KY", "MS", "AR"] },
       { targetAbbr: "CO", contextAbbrs: ["CO", "WY", "UT"], caller: "Denver on line five", line: "Mile-high caller here. I am Denver, and I need my mountain state.", prompt: "Denver is the capital of which state?", choices: ["CO", "WY", "UT", "NM"] },
       { targetAbbr: "MA", contextAbbrs: ["MA", "RI", "CT"], caller: "Boston on line six", line: "This is Boston. Please pahk me in the right New England state.", prompt: "Boston is the capital of which state?", choices: ["MA", "RI", "CT", "NH"] },
-      { targetAbbr: "IL", contextAbbrs: ["IL", "IN", "IA"], caller: "I-State emergency", line: "I am Illinois, reporting from the noisy spring department. If I sound ill from all those squeaky springs, send me back to Springfield.", prompt: "Springfield is the capital of which I-state?", choices: ["IL", "IN", "IA", "MO"] },
-      { targetAbbr: "IN", contextAbbrs: ["IN", "IL", "OH"], caller: "I-State emergency", line: "Indianapolis calling. I am the Indiana one because my name starts with Indiana and then keeps going until it becomes Indianapolis.", prompt: "Indianapolis is the capital of which state?", choices: ["IN", "IL", "OH", "IA"] },
-      { targetAbbr: "IA", contextAbbrs: ["IA", "MO", "MN"], caller: "I-State emergency", line: "Des Moines here. I owe ya an answer: Iowa. Coins, Moines, I owe ya. Please file that under weird but useful.", prompt: "Des Moines is the capital of which state?", choices: ["IA", "IL", "IN", "MN"] },
-      { targetAbbr: "ND", contextAbbrs: ["ND", "SD", "MN"], caller: "Dakota capital twin", line: "Bismarck calling from North Dakota. I am the upper Dakota, and my capital sounds like a very serious history teacher.", prompt: "Bismarck is the capital of which Dakota?", choices: ["ND", "SD", "NE", "KS"] },
-      { targetAbbr: "SD", contextAbbrs: ["SD", "ND", "NE"], caller: "Dakota capital twin", line: "Actually, we just pronounce it peer. Not the French way. Remember to put your coat on when you head south to the pier.", prompt: "Pierre is the capital of which Dakota?", choices: ["SD", "ND", "NE", "KS"], audio: "assets/audio/capital-piere-south-dakota.mp3" },
-      { targetAbbr: "MI", contextAbbrs: ["MI", "WI", "MN"], caller: "Great Lakes lost and found", line: "Lansing calling from Michigan. Think of the mitten landing in Lansing, then stop sending me to Detroit.", prompt: "Lansing is the capital of which Great Lakes state?", choices: ["MI", "WI", "MN", "IL"] },
+      { targetAbbr: "IL", contextAbbrs: ["IL", "IN", "IA"], caller: "Bart Simpson", line: "Eat my shorts! I'm Bart Simpson, the coolest kid in Springfield. The capital of what state?", prompt: "Springfield is the capital of which state?", choices: ["IL", "IN", "IA", "MO"], audio: "assets/audio/capital-springfield-illinois.mp3" },
+      { targetAbbr: "IN", contextAbbrs: ["IN", "IL", "OH"], caller: "I-State emergency", line: "Ladies and gentlemen, we've got a car absolutely flyin' here at the Indy 500. Somebody better call the Indiana police. Wait, the Indianapolis?", prompt: "Indianapolis is the capital of which state?", choices: ["IN", "IL", "OH", "IA"], audio: "assets/audio/capital-indianapolis-indiana.mp3" },
+      { targetAbbr: "IA", contextAbbrs: ["IA", "MO", "MN"], caller: "Corny accountant", line: "Des Moines here. Listen, I did the math. I got coins, I got Moines, and somehow I still owe ya. Real corny accounting.", prompt: "Des Moines is the capital of which state?", choices: ["IA", "IL", "IN", "MN"], audio: "assets/audio/capital-des-moines-iowa.mp3" },
+      { targetAbbr: "ND", contextAbbrs: ["ND", "SD", "MN"], caller: "Coat culprit", line: "Ope, what made this mark on yer North Face coat, eh? That's a real Bismarck ya got there.", prompt: "Bismarck is the capital of which state?", choices: ["ND", "SD", "NE", "KS"], audio: "assets/audio/capital-bismarck-north-dakota.mp3" },
+      { targetAbbr: "SD", contextAbbrs: ["SD", "ND", "NE"], caller: "It's not French", line: "Actually, we pronounce it peer. Put your coat on when you head south to the Pierre.", prompt: "Pierre is the capital of which Dakota?", choices: ["SD", "ND", "NE", "KS"], audio: "assets/audio/capital-piere-south-dakota.mp3" },
+      { targetAbbr: "MI", contextAbbrs: ["MI", "WI", "MN"], caller: "Sir Lance wants to sing", line: "Yeah, what up doe. This Sir Lance. I came to sing, right here, real close. But I ain't gon' lie, I miss my friends.", prompt: "Lansing is the capital of which Great Lakes state?", choices: ["MI", "WI", "MN", "IL"], audio: "assets/audio/capital-lansing-michigan.mp3" },
       { targetAbbr: "WI", contextAbbrs: ["WI", "MI", "MN"], caller: "Madison hotline", line: "Oh hey there. You betcha. I'm callin' from Madison. We've got lakes, a big university, and plastic pink flamingos are our official city bird. Wishin' ya knew what state I'm in? Don't be mad, son.", prompt: "Madison is the capital of which state?", choices: ["WI", "MI", "MN", "IA"], audio: "assets/audio/capital-madison-wisconsin.mp3" },
-      { targetAbbr: "MN", contextAbbrs: ["MN", "WI", "IA"], caller: "Great Lakes lost and found", line: "Saint Paul calling from Minnesota. Mini sodas for Saint Paul: Minnesota, Saint Paul. Weird order, useful memory.", prompt: "Saint Paul is the capital of which state?", choices: ["MN", "WI", "IA", "MI"] },
-      { targetAbbr: "KS", contextAbbrs: ["KS", "NE", "OK"], caller: "Rectangle capital office", line: "Topeka here. Kansas went to peek at Dorothy's house, so the flat can state gets Topeka.", prompt: "Topeka is the capital of which rectangle-ish state?", choices: ["KS", "NE", "OK", "MO"] },
-      { targetAbbr: "NE", contextAbbrs: ["NE", "KS", "SD"], caller: "Rectangle capital office", line: "Lincoln calling from Nebraska. Nebraska is above Kansas, and Lincoln is where this rectangle filed its paperwork.", prompt: "Lincoln is the capital of which state?", choices: ["NE", "KS", "SD", "ND"] },
-      { targetAbbr: "OH", contextAbbrs: ["OH", "IN", "MI"], caller: "Not St. Louis desk", line: "Columbus calling from Ohio. Oh, hi, Mr. Columbus. That is the whole trick, and honestly it does the job.", prompt: "Columbus is the capital of which state?", choices: ["OH", "MO", "IN", "MI"] },
-      { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Jefferson City calling from Missouri. St. Louis is famous, but I am the capital. Jefferson City gets the Missouri paperwork.", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"] },
-      { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Cheyenne calling from the wide open range. If you are shy, Anne, ride out to Wyoming and say it fast: Cheyenne, Wyoming.", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" }
+      { targetAbbr: "MN", contextAbbrs: ["MN", "WI", "IA"], caller: "Great Lakes Refreshments", line: "Oh yah, my buddy Paul walks in with teeny-tiny little Cokes. Paul brought mini sodas. Well, ya know, he's a Saint.", prompt: "Saint Paul is the capital of which state?", choices: ["MN", "WI", "IA", "MI"], audio: "assets/audio/capital-st-paul-minnesota.mp3" },
+      { targetAbbr: "KS", contextAbbrs: ["KS", "NE", "OK"], caller: "Todo, I don't think we're in...", line: "Hello there, it's Dorothy. Did you come all this way just to peek at my house? My goodness, you must've come to Topeka.", prompt: "Topeka is the capital of which state?", choices: ["KS", "NE", "OK", "MO"], audio: "assets/audio/capital-topeka-kansas.mp3" },
+      { targetAbbr: "NE", contextAbbrs: ["NE", "KS", "SD"], caller: "Statue of the President", line: "President Lincoln? Yes sir. I built him a statue with knees of brass.", prompt: "Lincoln is the capital of which state?", choices: ["NE", "KS", "SD", "ND"], audio: "assets/audio/capital-lincoln-nebraska.mp3" },
+      { targetAbbr: "OH", contextAbbrs: ["OH", "IN", "MI"], caller: "Columbus desk", line: "Front desk, Columbus speaking. Oh, hi! Oh, hi again!", prompt: "Columbus is the capital of which state?", choices: ["OH", "MO", "IN", "MI"], audio: "assets/audio/capital-columbus-ohio.mp3" },
+      { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Hi there, this is Miss Ouri callin'. Me and Mr. Jefferson went down to the city. Jefferson City, that's where we landed. But what state?", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"], audio: "assets/audio/capital-jefferson-city-missouri.mp3" },
+      { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Cheyenne calling from the wide open range. If you are shy, Anne, ride out to Wyoming and say it fast: Cheyenne, Wyoming.", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" },
+      { targetAbbr: "AL", answerKind: "capital", contextAbbrs: ["AL", "MS", "GA"], caller: "Mountain-gum dispatch", line: "Alabama is on the line with Al on a mountain of gum. The capital sounds like Monty's gum mountain.", prompt: "Which capital belongs to Alabama?", choices: ["AL", "MS", "GA", "TN"] },
+      { targetAbbr: "AZ", answerKind: "capital", contextAbbrs: ["AZ", "NM", "UT"], caller: "Desert bird desk", line: "Arizona says a fiery bird keeps rising out of the desert. That bird is also the capital clue.", prompt: "Which capital belongs to Arizona?", choices: ["AZ", "NM", "UT", "CO"] },
+      { targetAbbr: "AR", answerKind: "capital", contextAbbrs: ["AR", "LA", "MS"], caller: "Tiny boulder bureau", line: "Arkansas found a very small boulder in its pocket. The pocket rock is the capital clue.", prompt: "Which capital belongs to Arkansas?", choices: ["AR", "LA", "MS", "OK"] },
+      { targetAbbr: "CT", answerKind: "capital", contextAbbrs: ["CT", "RI", "MA"], caller: "Heart monitor line", line: "Connecticut is sending a heart-shaped message. Follow the heart to the capital.", prompt: "Which capital belongs to Connecticut?", choices: ["CT", "RI", "MA", "NJ"] },
+      { targetAbbr: "DE", answerKind: "capital", contextAbbrs: ["DE", "MD", "NJ"], caller: "Driving-over desk", line: "Delaware says it is driving over to the capital. Over, dover, close enough for the map.", prompt: "Which capital belongs to Delaware?", choices: ["DE", "MD", "NJ", "PA"] },
+      { targetAbbr: "FL", answerKind: "capital", contextAbbrs: ["FL", "GA", "AL"], caller: "Tall sunshine hotline", line: "Florida is tall and sunny today. The capital starts with tall, too.", prompt: "Which capital belongs to Florida?", choices: ["FL", "GA", "AL", "SC"] },
+      { targetAbbr: "GA", answerKind: "capital", contextAbbrs: ["GA", "AL", "SC"], caller: "Peach airport desk", line: "Georgia is calling from the big airport city. The capital clue is traffic, peaches, and a very busy skyline.", prompt: "Which capital belongs to Georgia?", choices: ["GA", "AL", "SC", "NC"] },
+      { targetAbbr: "HI", answerKind: "capital", contextAbbrs: ["HI", "AK", "CA"], caller: "Island hello line", line: "Hawaii says hello twice, then adds Lulu at the end. That hello-Lulu sound points to the capital.", prompt: "Which capital belongs to Hawaii?", choices: ["HI", "AK", "CA", "WA"] },
+      { targetAbbr: "KY", answerKind: "capital", contextAbbrs: ["KY", "TN", "WV"], caller: "Not fried chicken desk", line: "Kentucky says the capital is not Louisville and not a bucket of chicken. Think Frank with a fort.", prompt: "Which capital belongs to Kentucky?", choices: ["KY", "TN", "WV", "VA"] },
+      { targetAbbr: "LA", answerKind: "capital", contextAbbrs: ["LA", "MS", "AR"], caller: "Red baton relay", line: "Louisiana is passing a red baton down the river. The baton is the capital clue.", prompt: "Which capital belongs to Louisiana?", choices: ["LA", "MS", "AR", "TX"] },
+      { targetAbbr: "ME", answerKind: "capital", contextAbbrs: ["ME", "NH", "VT"], caller: "Windy vacation desk", line: "Maine says an August gust just hit the coast. August plus a gust points to the capital.", prompt: "Which capital belongs to Maine?", choices: ["ME", "NH", "VT", "MA"] },
+      { targetAbbr: "MD", answerKind: "capital", contextAbbrs: ["MD", "DE", "VA"], caller: "Naval map desk", line: "Maryland says Ann borrowed a police hat near the water. Ann-a-police is the clue.", prompt: "Which capital belongs to Maryland?", choices: ["MD", "DE", "VA", "PA"] },
+      { targetAbbr: "MS", answerKind: "capital", contextAbbrs: ["MS", "AL", "LA"], caller: "Moonwalk river line", line: "Mississippi is moonwalking down the river with a famous Jackson. That name is the capital clue.", prompt: "Which capital belongs to Mississippi?", choices: ["MS", "AL", "LA", "TN"] },
+      { targetAbbr: "MT", answerKind: "capital", contextAbbrs: ["MT", "ID", "WY"], caller: "Last chance tea shop", line: "Montana says Helen wants lemon tea, Anna. Helen-a, Montana. Say it fast.", prompt: "Which capital belongs to Montana?", choices: ["MT", "ID", "WY", "CO"] },
+      { targetAbbr: "NV", answerKind: "capital", contextAbbrs: ["NV", "CA", "UT"], caller: "Desert car line", line: "Nevada needs a car, son, to cross the desert. Car-son is the capital clue.", prompt: "Which capital belongs to Nevada?", choices: ["NV", "CA", "UT", "AZ"] },
+      { targetAbbr: "NH", answerKind: "capital", contextAbbrs: ["NH", "VT", "ME"], caller: "Agreeable ham desk", line: "New Hampshire says everybody agrees about the capital. Agreement means concord.", prompt: "Which capital belongs to New Hampshire?", choices: ["NH", "VT", "ME", "MA"] },
+      { targetAbbr: "NJ", answerKind: "capital", contextAbbrs: ["NJ", "NY", "DE"], caller: "Jersey train line", line: "New Jersey says Trent has on a new jersey. Trent-on is the capital clue.", prompt: "Which capital belongs to New Jersey?", choices: ["NJ", "NY", "DE", "PA"] },
+      { targetAbbr: "NM", answerKind: "capital", contextAbbrs: ["NM", "AZ", "CO"], caller: "Santa desert desk", line: "New Mexico says Santa fainted in the heat. Santa Fe is hiding in that sentence.", prompt: "Which capital belongs to New Mexico?", choices: ["NM", "AZ", "CO", "TX"] },
+      { targetAbbr: "NY", answerKind: "capital", contextAbbrs: ["NY", "NJ", "PA"], caller: "Not the big city desk", line: "New York says the famous city is not the capital. All bunnies go upstate for the clue.", prompt: "Which capital belongs to New York?", choices: ["NY", "NJ", "PA", "CT"] },
+      { targetAbbr: "NC", answerKind: "capital", contextAbbrs: ["NC", "SC", "VA"], caller: "Pep rally line", line: "North Carolina says everyone rally at the capital. Rally sounds like the clue.", prompt: "Which capital belongs to North Carolina?", choices: ["NC", "SC", "VA", "TN"] },
+      { targetAbbr: "OK", answerKind: "capital", contextAbbrs: ["OK", "AR", "TX"], caller: "Oak tree city desk", line: "Oklahoma keeps it extremely straightforward. The state name comes right back with city at the end.", prompt: "Which capital belongs to Oklahoma?", choices: ["OK", "AR", "TX", "KS"] },
+      { targetAbbr: "OR", answerKind: "capital", contextAbbrs: ["OR", "WA", "CA"], caller: "Sailing west desk", line: "Oregon says sail 'em fast toward the capital. Sail 'em points to the city name.", prompt: "Which capital belongs to Oregon?", choices: ["OR", "WA", "CA", "ID"] },
+      { targetAbbr: "PA", answerKind: "capital", contextAbbrs: ["PA", "NY", "MD"], caller: "Hairy burger line", line: "Pennsylvania says the capital is not Philly or Pittsburgh. Think hairy burger.", prompt: "Which capital belongs to Pennsylvania?", choices: ["PA", "NY", "MD", "DE"] },
+      { targetAbbr: "RI", answerKind: "capital", contextAbbrs: ["RI", "CT", "MA"], caller: "Tiny island desk", line: "Rhode Island says the answer is proven-dense. Providence is hiding in that sound.", prompt: "Which capital belongs to Rhode Island?", choices: ["RI", "CT", "MA", "VT"] },
+      { targetAbbr: "SC", answerKind: "capital", contextAbbrs: ["SC", "NC", "GA"], caller: "Column of bees line", line: "South Carolina says Caroline's column of bees flew south. Column-bee-a is the clue.", prompt: "Which capital belongs to South Carolina?", choices: ["SC", "NC", "GA", "VA"] },
+      { targetAbbr: "TX", answerKind: "capital", contextAbbrs: ["TX", "OK", "LA"], caller: "Big guitar desk", line: "Texas says the capital has music, bats, and a guitar tuned in the middle of the state.", prompt: "Which capital belongs to Texas?", choices: ["TX", "OK", "LA", "AR"] },
+      { targetAbbr: "UT", answerKind: "capital", contextAbbrs: ["UT", "CO", "AZ"], caller: "Salty chef line", line: "Okay, so you talk about salt like city chefs do. But is it local? Is it flaky? Does it have a story?", prompt: "Which capital belongs to Utah?", choices: ["UT", "CO", "AZ", "NV"], audio: "assets/audio/capital-Salt-lake-city-utah.mp3" },
+      { targetAbbr: "VT", answerKind: "capital", contextAbbrs: ["VT", "NH", "NY"], caller: "Tiny mountain desk", line: "Vermont says a mountain might peel your skin. Mont-peel-ier is the clue.", prompt: "Which capital belongs to Vermont?", choices: ["VT", "NH", "NY", "ME"] },
+      { targetAbbr: "VA", answerKind: "capital", contextAbbrs: ["VA", "NC", "WV"], caller: "History money line", line: "Virginia says its capital sounds like a rich man with history homework.", prompt: "Which capital belongs to Virginia?", choices: ["VA", "NC", "WV", "MD"] },
+      { targetAbbr: "WA", answerKind: "capital", contextAbbrs: ["WA", "OR", "ID"], caller: "Olympic laundry desk", line: "Washington says it washes tons at the Olympics. Olympic points lead to the capital.", prompt: "Which capital belongs to Washington?", choices: ["WA", "OR", "ID", "CA"], audio: "assets/audio/capital-olympia-washigton.mp3" },
+      { targetAbbr: "WV", answerKind: "capital", contextAbbrs: ["WV", "VA", "KY"], caller: "Mountain dance line", line: "West Virginia says it is dancing the Charleston through the mountains.", prompt: "Which capital belongs to West Virginia?", choices: ["WV", "VA", "KY", "TN"] }
     ]
   }
 ];
@@ -321,6 +601,8 @@ let progress = loadProgress();
 let geoData = null;
 let audioContext = null;
 const CORRECT_COACH_DELAY_MS = 7000;
+const MINI_INTRO_DEFAULT_MS = 1450;
+const MINI_INTRO_AUDIO_FALLBACK_MS = 4200;
 
 const appState = {
   currentScreen: "home",
@@ -330,6 +612,9 @@ const appState = {
   currentQuestion: null,
   driveData: null,
   courtIntroKey: null,
+  introLocked: false,
+  introUnlockTimer: null,
+  activeIntroAudio: null,
   lastClickedAbbr: null,
   advanceTimer: null
 };
@@ -437,15 +722,23 @@ function loadRegionPacks() {
   try {
     const saved = JSON.parse(localStorage.getItem(REGION_OVERRIDE_KEY));
     if (Array.isArray(saved) && saved.length === DEFAULT_REGION_PACKS.length) {
+      if (regionSignature(saved) === LEGACY_REGION_SIGNATURE_OK_NORTHEAST) {
+        localStorage.removeItem(REGION_OVERRIDE_KEY);
+        return DEFAULT_REGION_PACKS.map((pack) => ({ ...pack, states: [...pack.states] }));
+      }
       return DEFAULT_REGION_PACKS.map((pack) => {
         const override = saved.find((candidate) => candidate.id === pack.id);
-        return override ? { ...pack, states: override.states } : { ...pack };
+        return override ? { ...pack, states: [...override.states] } : { ...pack, states: [...pack.states] };
       });
     }
   } catch (error) {
     // Ignore malformed saved regions.
   }
   return DEFAULT_REGION_PACKS.map((pack) => ({ ...pack, states: [...pack.states] }));
+}
+
+function regionSignature(packs) {
+  return packs.map((pack) => `${pack.id}:${(pack.states || []).join(",")}`).join("|");
 }
 
 function validateRegions() {
@@ -656,6 +949,13 @@ function pickBonusQuestion(session, requestedType = "mini") {
     "borderline-hotline": () => buildEligibleHotlineQuestion(session),
     "capital-call-in": () => buildEligibleCapitalCallQuestion(session)
   };
+  if (requestedType === "capital-call-in") {
+    const requested = buildEligibleCallBreakQuestion(session);
+    if (requested) {
+      session.usedSpecialTypes.push(requested.bonusId);
+      return requested;
+    }
+  }
   if (requestedType !== "mini" && builders[requestedType]) {
     const requested = builders[requestedType]();
     if (requested) {
@@ -782,23 +1082,39 @@ function buildEligibleHotlineQuestion(session) {
   };
 }
 
+function buildEligibleCallBreakQuestion(session) {
+  const candidates = [];
+  if (hasEligibleBonusCase("capital-call-in", "calls", session, { preferAudio: true })) candidates.push("capital-call-in");
+  if (hasEligibleBonusCase("borderline-hotline", "calls", session)) candidates.push("borderline-hotline");
+  if (!candidates.length) return null;
+  const freshTypes = candidates.filter((type) => !session.usedSpecialTypes.includes(type));
+  const pickedType = randomItem(freshTypes.length ? freshTypes : candidates);
+  return pickedType === "borderline-hotline"
+    ? buildEligibleHotlineQuestion(session)
+    : buildEligibleCapitalCallQuestion(session);
+}
+
 function buildEligibleCapitalCallQuestion(session) {
   const call = pickBonusCase("capital-call-in", "calls", session, { preferAudio: true });
   if (!call) return null;
   const target = stateByAbbr.get(call.targetAbbr);
+  const answerKind = call.answerKind === "capital" ? "capital" : "state";
   return {
     kind: "call-in",
     bonusId: "capital-call-in",
     modeLabel: "Capital Call-In",
+    answerKind,
     targetAbbr: call.targetAbbr,
     prompt: call.prompt,
     screenTitle: "Capital Call-In",
     caller: call.caller,
     line: call.line,
     audio: call.audio || null,
-    expectedLabel: target.name,
-    choices: buildAbbrChoices(call.choices, session.pool, call.targetAbbr),
-    correction: `${stateByAbbr.get(call.targetAbbr).capital} belongs to ${target.name}.`
+    expectedLabel: answerKind === "capital" ? target.capital : target.name,
+    choices: answerKind === "capital"
+      ? buildCapitalChoices(call.choices, session.pool, call.targetAbbr)
+      : buildAbbrChoices(call.choices, session.pool, call.targetAbbr),
+    correction: answerKind === "capital" ? `${target.name}'s capital is ${target.capital}.` : `${target.capital} belongs to ${target.name}.`
   };
 }
 
@@ -826,8 +1142,22 @@ function buildEligibleTipQuestion(session) {
 }
 
 function pickBonusCase(gameId, property, session, options = {}) {
+  const eligibleCases = getEligibleBonusCases(gameId, property, session, options);
+  if (!eligibleCases.length) return null;
+  if (options.preferAudio) {
+    const freshAudioCases = eligibleCases.filter((caseItem) => caseItem.audio && !session.usedBonusCaseKeys.includes(bonusCaseKey(gameId, caseItem)));
+    if (freshAudioCases.length) return pickUnusedBonusCase(gameId, freshAudioCases, session);
+  }
+  return pickUnusedBonusCase(gameId, eligibleCases, session);
+}
+
+function hasEligibleBonusCase(gameId, property, session, options = {}) {
+  return getEligibleBonusCases(gameId, property, session, options).length > 0;
+}
+
+function getEligibleBonusCases(gameId, property, session, options = {}) {
   const game = BONUS_GAMES.find((candidate) => candidate.id === gameId);
-  if (!game) return null;
+  if (!game) return [];
   const poolSet = new Set(session.pool);
   let eligibleCases = game[property].filter((caseItem) => {
     if (session.regionId === "all") return true;
@@ -836,7 +1166,7 @@ function pickBonusCase(gameId, property, session, options = {}) {
   if (options.preferAudio && eligibleCases.some((caseItem) => caseItem.audio)) {
     eligibleCases = eligibleCases.filter((caseItem) => caseItem.audio);
   }
-  return pickUnusedBonusCase(gameId, eligibleCases, session);
+  return eligibleCases;
 }
 
 function pickUnusedBonusCase(gameId, cases, session) {
@@ -864,6 +1194,22 @@ function buildAbbrChoices(abbrs, pool, correctAbbr) {
   return shuffle(choices.slice(0, 4)).map((abbr) => ({
     abbr,
     label: stateByAbbr.get(abbr).name
+  }));
+}
+
+function buildCapitalChoices(abbrs, pool, correctAbbr) {
+  const choices = [...new Set([correctAbbr, ...abbrs])];
+  const decoys = shuffle(pool.filter((abbr) => !choices.includes(abbr)));
+  decoys.forEach((abbr) => {
+    if (choices.length < 4) choices.push(abbr);
+  });
+  while (choices.length < 4) {
+    const abbr = randomItem(allAbbrs);
+    if (!choices.includes(abbr)) choices.push(abbr);
+  }
+  return shuffle(choices.slice(0, 4)).map((abbr) => ({
+    abbr,
+    label: stateByAbbr.get(abbr).capital
   }));
 }
 
@@ -907,6 +1253,7 @@ function routeStates(route) {
 function renderQuestion() {
   const question = appState.currentQuestion;
   const session = appState.session;
+  clearIntroLock();
   els.gameScreen.classList.toggle("court-mode", question.kind === "court");
   els.gameScreen.classList.toggle("drive-mode", question.kind === "drive");
   els.gameScreen.classList.toggle("tip-mode", question.kind === "tip");
@@ -923,9 +1270,7 @@ function renderQuestion() {
   if (question.kind === "drive") prepareDriveState(question);
   renderAnswerArea(question);
   renderMap();
-  if (question.kind === "court") playCourtIntro(question);
-  if (question.kind === "tip") playTipIntro(question);
-  if (isChoiceMiniQuestion(question)) playArcadeIntro(question);
+  playQuestionIntro(question);
 }
 
 function renderAnswerArea(question) {
@@ -999,11 +1344,11 @@ function renderDriveControls(question) {
     <p><strong>${origin.name}</strong> to <strong>${destination.name}</strong></p>
     <p class="drive-rule">Avoid: ${avoid}</p>
     <p class="drive-rule">Checkpoint: ${checkpoints}</p>
-    <p id="driveStatus" class="drive-status">Hold and drag on the map to reveal the car and start driving from ${origin.name}.</p>
+    <p id="driveStatus" class="drive-status">Listen first. The route unlocks after the intro.</p>
     <div id="driveClickChoices" class="drive-click-choices" hidden></div>
     <div class="drive-actions">
-      <button id="driveRetry" class="utility-button" type="button">Start over</button>
-      <button id="driveFallback" class="utility-button" type="button">Use click route</button>
+      <button id="driveRetry" class="utility-button" type="button" disabled data-intro-locked="true">Start over</button>
+      <button id="driveFallback" class="utility-button" type="button" disabled data-intro-locked="true">Use click route</button>
     </div>
   `;
   els.answerArea.appendChild(panel);
@@ -1027,7 +1372,7 @@ function renderCourtControls(question) {
     </div>
     <p class="court-case">Case file: ${question.caseTitle}</p>
     <p class="court-testimony">${question.testimony}</p>
-    <p id="courtStatus" class="court-status">Choose the state on trial.</p>
+    <p id="courtStatus" class="court-status">Listen first, then choose the state on trial.</p>
     <div class="court-choices"></div>
   `;
   const choicesContainer = panel.querySelector(".court-choices");
@@ -1036,6 +1381,8 @@ function renderCourtControls(question) {
     button.type = "button";
     button.className = "choice-button court-choice";
     button.textContent = choice.label;
+    button.disabled = true;
+    button.dataset.introLocked = "true";
     button.addEventListener("click", () => handleCourtChoice(choice.abbr, button));
     choicesContainer.appendChild(button);
   });
@@ -1053,7 +1400,7 @@ function renderArcadeMiniControls(question) {
     ${renderMiniVisual(question)}
     <p class="arcade-caller">${question.caller || "Arcade desk"}</p>
     <p class="arcade-line">${question.line || question.clue}</p>
-    <p id="miniStatus" class="arcade-status">${question.instruction || "Pick the state that solves it."}</p>
+    <p id="miniStatus" class="arcade-status">Listen first. Choices unlock after the intro.</p>
     <div class="arcade-choices"></div>
   `;
   const choicesContainer = panel.querySelector(".arcade-choices");
@@ -1062,6 +1409,8 @@ function renderArcadeMiniControls(question) {
     button.type = "button";
     button.className = "choice-button arcade-choice";
     button.textContent = choice.label;
+    button.disabled = true;
+    button.dataset.introLocked = "true";
     button.addEventListener("click", () => handleMiniChoice(choice.abbr, button));
     choicesContainer.appendChild(button);
   });
@@ -1107,7 +1456,8 @@ function renderTipBreak(question) {
     <p class="tip-title">${question.title}</p>
     <p class="tip-line">${question.line}</p>
     <p class="tip-source">${question.source}</p>
-    <button id="continueTip" class="primary-button" type="button">Back to Boss Round</button>
+    <p id="tipStatus" class="arcade-status">Listen first. Continue unlocks after the intro.</p>
+    <button id="continueTip" class="primary-button" type="button" disabled data-intro-locked="true">Back to Boss Round</button>
   `;
   els.answerArea.appendChild(panel);
   const revealMimal = document.getElementById("revealMimal");
@@ -1552,7 +1902,7 @@ function prepareDriveState(question) {
 
 function handleDrivePointerDown(event) {
   const question = appState.currentQuestion;
-  if (!question || question.kind !== "drive" || appState.session.answered) return;
+  if (!question || question.kind !== "drive" || appState.session.answered || appState.introLocked) return;
   event.preventDefault();
   ensureAudio();
   appState.driveData.hasStarted = true;
@@ -1599,7 +1949,7 @@ function updateDriveFromPointer(event, svg) {
 function processDriveState(abbr, snapToState = false) {
   const question = appState.currentQuestion;
   const driveData = appState.driveData;
-  if (!question || question.kind !== "drive" || !driveData || appState.session.answered || !stateByAbbr.has(abbr)) return;
+  if (!question || question.kind !== "drive" || !driveData || appState.session.answered || appState.introLocked || !stateByAbbr.has(abbr)) return;
   if (snapToState) {
     const center = getStateCenter(abbr);
     driveData.carX = center[0];
@@ -1677,7 +2027,7 @@ function updateDriveStatus(message) {
 
 function showClickRouteFallback(question) {
   const choicesContainer = document.getElementById("driveClickChoices");
-  if (!choicesContainer) return;
+  if (!choicesContainer || appState.introLocked) return;
   const routeCodes = [...new Set([question.originAbbr, ...question.checkpointAbbrs, question.destinationAbbr, ...question.avoidAbbrs])];
   const sessionPool = appState.session ? appState.session.pool : allAbbrs;
   const decoys = sessionPool.filter((abbr) => !routeCodes.includes(abbr));
@@ -1869,7 +2219,7 @@ function handleChoice(choice, button) {
 function handleCourtChoice(abbr, button) {
   const question = appState.currentQuestion;
   const session = appState.session;
-  if (!question || question.kind !== "court" || session.answered) return;
+  if (!question || question.kind !== "court" || session.answered || appState.introLocked) return;
   ensureAudio();
   if (abbr === question.defendantAbbr) {
     const buttons = [...els.answerArea.querySelectorAll(".court-choice")];
@@ -1890,7 +2240,7 @@ function handleCourtChoice(abbr, button) {
 function handleMiniChoice(abbr, button) {
   const question = appState.currentQuestion;
   const session = appState.session;
-  if (!isChoiceMiniQuestion(question) || session.answered) return;
+  if (!isChoiceMiniQuestion(question) || session.answered || appState.introLocked) return;
   ensureAudio();
   if (abbr === question.targetAbbr) {
     const buttons = [...els.answerArea.querySelectorAll(".arcade-choice")];
@@ -1911,7 +2261,7 @@ function handleMiniChoice(abbr, button) {
 function continueTip() {
   const question = appState.currentQuestion;
   const session = appState.session;
-  if (!question || question.kind !== "tip" || session.answered) return;
+  if (!question || question.kind !== "tip" || session.answered || appState.introLocked) return;
   session.answered = true;
   session.correct += 1;
   session.streak += 1;
@@ -2357,6 +2707,112 @@ function playTone(frequency, duration, type) {
   oscillator.stop(audioContext.currentTime + duration / 1000 + 0.02);
 }
 
+function playQuestionIntro(question) {
+  if (!question || !isMiniIntroQuestion(question)) return;
+  startIntroLock(question);
+  showMiniBumper(question);
+  if (question.kind === "court") {
+    playCourtIntro(question);
+    return;
+  }
+  if (question.kind === "tip") {
+    playTipIntro(question);
+    return;
+  }
+  if (question.kind === "drive") {
+    playDriveIntro(question);
+    return;
+  }
+  if (isChoiceMiniQuestion(question)) {
+    playArcadeIntro(question);
+  }
+}
+
+function isMiniIntroQuestion(question) {
+  return question && ["court", "drive", "square", "hotline", "call-in", "tip"].includes(question.kind);
+}
+
+function startIntroLock(question) {
+  appState.introLocked = true;
+  if (appState.introUnlockTimer) window.clearTimeout(appState.introUnlockTimer);
+  const hasRecordedIntro = question.audio || question.kind === "court";
+  appState.introUnlockTimer = window.setTimeout(() => unlockIntro(question), hasRecordedIntro ? MINI_INTRO_AUDIO_FALLBACK_MS : MINI_INTRO_DEFAULT_MS);
+}
+
+function extendIntroLockWithAudio(audio) {
+  if (!audio) return;
+  appState.activeIntroAudio = audio;
+  audio.addEventListener("ended", () => unlockIntro(appState.currentQuestion), { once: true });
+  audio.addEventListener("error", () => unlockIntro(appState.currentQuestion), { once: true });
+}
+
+function clearIntroLock() {
+  if (appState.introUnlockTimer) {
+    window.clearTimeout(appState.introUnlockTimer);
+    appState.introUnlockTimer = null;
+  }
+  if (appState.activeIntroAudio) {
+    appState.activeIntroAudio.pause();
+    appState.activeIntroAudio = null;
+  }
+  appState.introLocked = false;
+  removeMiniBumper();
+}
+
+function unlockIntro(question) {
+  if (!appState.introLocked) return;
+  if (appState.introUnlockTimer) {
+    window.clearTimeout(appState.introUnlockTimer);
+    appState.introUnlockTimer = null;
+  }
+  appState.introLocked = false;
+  appState.activeIntroAudio = null;
+  els.answerArea.querySelectorAll("[data-intro-locked='true']").forEach((button) => {
+    button.disabled = false;
+    delete button.dataset.introLocked;
+  });
+  if (!question) return;
+  if (question.kind === "court") updateCourtStatus("Choose the state on trial.");
+  if (question.kind === "drive") updateDriveStatus(`Hold and drag on the map to reveal the car and start driving from ${stateByAbbr.get(question.originAbbr).name}.`);
+  if (isChoiceMiniQuestion(question)) updateMiniStatus(question.instruction || "Pick the answer that solves it.");
+  if (question.kind === "tip") {
+    const status = document.getElementById("tipStatus");
+    if (status) status.textContent = "Ready when you are.";
+  }
+}
+
+function showMiniBumper(question) {
+  removeMiniBumper();
+  const bumper = document.createElement("div");
+  bumper.className = `mini-bumper bumper-${question.kind}`;
+  bumper.setAttribute("aria-live", "polite");
+  bumper.innerHTML = `
+    <div class="mini-bumper-card">
+      <span class="mini-bumper-kicker">${bumperKicker(question)}</span>
+      <strong>${escapeHtml(question.modeLabel || question.screenTitle || "Bonus Round")}</strong>
+      <span class="mini-bumper-flash" aria-hidden="true"></span>
+    </div>
+  `;
+  els.gameScreen.appendChild(bumper);
+  window.setTimeout(() => {
+    if (bumper.parentNode) bumper.remove();
+  }, 1250);
+}
+
+function removeMiniBumper() {
+  els.gameScreen.querySelectorAll(".mini-bumper").forEach((bumper) => bumper.remove());
+}
+
+function bumperKicker(question) {
+  if (question.kind === "court") return "Order in the arcade";
+  if (question.kind === "drive") return "Start your engine";
+  if (question.kind === "hotline") return "Incoming border call";
+  if (question.kind === "call-in") return "Capital on the line";
+  if (question.kind === "square") return "Map shape lab";
+  if (question.kind === "tip") return "Memory break";
+  return "Bonus round";
+}
+
 function playCourtIntro(question) {
   const session = appState.session;
   if (!session || appState.courtIntroKey === session.index) return;
@@ -2364,12 +2820,12 @@ function playCourtIntro(question) {
   ensureAudio();
   const court = BONUS_GAMES.find((game) => game.id === "weird-neighbor-court");
   if (court && court.stinger) {
-    playAudioAsset(court.stinger, 0.76);
+    extendIntroLockWithAudio(playAudioAsset(court.stinger, 0.76));
   } else {
     playCourtStinger();
   }
   if (question.audio) {
-    window.setTimeout(() => playAudioAsset(question.audio, 0.78), 420);
+    window.setTimeout(() => extendIntroLockWithAudio(playAudioAsset(question.audio, 0.78)), 420);
   }
 }
 
@@ -2377,24 +2833,31 @@ function playTipIntro(question) {
   ensureAudio();
   playTipStinger();
   if (question.audio) {
-    window.setTimeout(() => playAudioAsset(question.audio, 0.78), 300);
+    window.setTimeout(() => extendIntroLockWithAudio(playAudioAsset(question.audio, 0.78)), 300);
   }
+}
+
+function playDriveIntro() {
+  ensureAudio();
+  playTone(150, 70, "square");
+  window.setTimeout(() => playTone(210, 80, "sawtooth"), 100);
+  window.setTimeout(() => playTone(320, 110, "triangle"), 230);
 }
 
 function playArcadeIntro(question) {
   ensureAudio();
   if (question.kind === "hotline") {
     playPhoneStinger();
-    if (question.audio) window.setTimeout(() => playAudioAsset(question.audio, 0.78), 420);
+    if (question.audio) window.setTimeout(() => extendIntroLockWithAudio(playAudioAsset(question.audio, 0.78)), 420);
     return;
   }
   if (question.kind === "call-in") {
     playRadioStinger();
-    if (question.audio) window.setTimeout(() => playAudioAsset(question.audio, 0.78), 420);
+    if (question.audio) window.setTimeout(() => extendIntroLockWithAudio(playAudioAsset(question.audio, 0.78)), 420);
     return;
   }
   playSquareStinger();
-  if (question.audio) window.setTimeout(() => playAudioAsset(question.audio, 0.78), 420);
+  if (question.audio) window.setTimeout(() => extendIntroLockWithAudio(playAudioAsset(question.audio, 0.78)), 420);
 }
 
 function playCourtStinger() {
@@ -2444,12 +2907,13 @@ function playSquareStinger() {
 }
 
 function playAudioAsset(src, volume = 0.7) {
-  if (!progress.sound) return;
+  if (!progress.sound) return null;
   const audio = new Audio(src);
   audio.volume = volume;
   audio.play().catch(() => {
     // Browser autoplay rules may block clips until after a gesture; tones still cover that case.
   });
+  return audio;
 }
 
 function updateCourtStatus(message) {
