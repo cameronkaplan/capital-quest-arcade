@@ -131,6 +131,7 @@ const BONUS_GAMES = [
     id: "road-trip",
     label: "Road Trip",
     reward: 1,
+    stinger: "assets/audio/Interstate Roadtrip.mp3",
     routes: [
       { originAbbr: "CA", destinationAbbr: "WA", avoidAbbrs: ["OR"], checkpointAbbrs: [], allowedAbbrs: [], prompt: "Drive from California to Washington without touching Oregon." },
       { originAbbr: "WA", destinationAbbr: "CA", avoidAbbrs: [], checkpointAbbrs: ["OR"], allowedAbbrs: [], prompt: "Drive from Washington to Oregon, then California." },
@@ -2750,7 +2751,7 @@ function isMiniIntroQuestion(question) {
 function startIntroLock(question) {
   appState.introLocked = true;
   if (appState.introUnlockTimer) window.clearTimeout(appState.introUnlockTimer);
-  const hasRecordedIntro = question.audio || question.kind === "court";
+  const hasRecordedIntro = question.audio || question.kind === "court" || question.kind === "drive";
   appState.introUnlockTimer = window.setTimeout(() => unlockIntro(question), hasRecordedIntro ? MINI_INTRO_AUDIO_FALLBACK_MS : MINI_INTRO_DEFAULT_MS);
 }
 
@@ -2854,6 +2855,11 @@ function playTipIntro(question) {
 
 function playDriveIntro() {
   ensureAudio();
+  const roadTrip = BONUS_GAMES.find((game) => game.id === "road-trip");
+  if (roadTrip && roadTrip.stinger) {
+    extendIntroLockWithAudio(playAudioAsset(roadTrip.stinger, 0.76));
+    return;
+  }
   playTone(150, 70, "square");
   window.setTimeout(() => playTone(210, 80, "sawtooth"), 100);
   window.setTimeout(() => playTone(320, 110, "triangle"), 230);
