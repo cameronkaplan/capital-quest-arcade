@@ -32,7 +32,6 @@
               <p class="section-label">Choose a map mission</p>
               <h2 id="homeTitle">Start with a region</h2>
             </div>
-            <button id="openEditor" class="utility-button" type="button">Parent setup</button>
           </div>
           <div id="regionGrid" class="region-grid" aria-live="polite"></div>
         </section>
@@ -88,28 +87,11 @@
           </div>
         </section>
 
-        <section id="editorScreen" class="screen editor-screen" aria-labelledby="editorTitle" hidden>
-          <div class="screen-heading">
-            <div>
-              <p class="section-label">Parent setup</p>
-              <h2 id="editorTitle">Edit region lists</h2>
-            </div>
-            <button id="closeEditor" class="utility-button" type="button">Back</button>
-          </div>
-          <p class="editor-help">Use two-letter state codes. Keep each state in exactly one region. The All tile is built automatically.</p>
-          <textarea id="regionEditor" spellcheck="false" rows="9" aria-label="Editable region state lists"></textarea>
-          <div class="editor-actions">
-            <button id="saveRegions" class="primary-button" type="button">Save regions</button>
-            <button id="restoreRegions" class="utility-button" type="button">Restore defaults</button>
-          </div>
-          <p id="editorMessage" class="editor-message" role="status"></p>
-        </section>
       </main>
 
       <footer class="source-footer">
         <span>Capital data: Britannica.</span>
         <span>Map geometry: U.S. Census cartographic boundary files.</span>
-        <span>Class regions: Gimkit links supplied by parent.</span>
       </footer>
     </div>
 
