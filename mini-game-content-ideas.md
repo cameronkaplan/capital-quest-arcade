@@ -21,7 +21,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Arizona
 - Format: State calls, name the capital.
 - Caller: Desert bird desk
-- Audio line: "Arizona says a fiery bird keeps rising out of the desert. That bird is also the capital clue."
+- Audio line: "Arizona calling. The air in the zone I'm in is so hot, even the birds burst into flames and start over."
 - Prompt: "Which capital belongs to Arizona?"
 
 ### Arkansas
@@ -37,10 +37,10 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 - Prompt: "Sacramento belongs to which state?"
 
 ### Colorado
-- Format: Capital calls, name the state.
+- Format: State calls, name the capital.
 - Caller: Mile-high caller
-- Audio line: "Mile-high caller here. I am Denver, and I need my mountain state."
-- Prompt: "Denver belongs to which state?"
+- Audio line: "[salesperson voice] Colorado cold? [shivers] Buy dense fur. [confident] Dense fur! [deadpan] The coat has a coat."
+- Prompt: "Which capital belongs to Colorado?"
 
 ### Connecticut
 - Format: State calls, name the capital.
@@ -157,10 +157,10 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 - Prompt: "Jefferson City is the capital of which state?"
 
 ### Montana
-- Format: State calls, name the capital.
-- Caller: Last chance tea shop
-- Audio line: "Montana says Helen wants lemon tea, Anna. Helen-a, Montana. Say it fast."
-- Prompt: "Which capital belongs to Montana?"
+- Format: Capital calls, name the state.
+- Caller: Helen on the Mountain
+- Audio line: "Hi there, sugar. It's Helen, and I'm stuck up here in the Elkhorn mountains. Won't you give old Helen a hand to help me off this mountain?"
+- Prompt: "Helena is the capital of which state?"
 
 ### Nebraska
 - Format: Capital calls, name the state.
@@ -170,14 +170,14 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Nevada
 - Format: State calls, name the capital.
-- Caller: Desert car line
-- Audio line: "Nevada needs a car, son, to cross the desert. Car-son is the capital clue."
+- Caller: Car-less Cowboy
+- Audio line: "Well I've never had a car, son. Not in the city, anyway. A horse won't parellel park"
 - Prompt: "Which capital belongs to Nevada?"
 
 ### New Hampshire
 - Format: State calls, name the capital.
-- Caller: Agreeable ham desk
-- Audio line: "New Hampshire says everybody agrees about the capital. Agreement means concord."
+- Caller: Victorious rodent
+- Audio line: "I'm the new hamster. I feel so clean, and I just *conquered* my new home"
 - Prompt: "Which capital belongs to New Hampshire?"
 
 ### New Jersey
@@ -189,7 +189,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### New Mexico
 - Format: State calls, name the capital.
 - Caller: Santa desert desk
-- Audio line: "New Mexico says Santa fainted in the heat. Santa Fe is hiding in that sentence."
+- Audio line: "[breaking news] We interrupt with urgent New Mexico weather news. [serious anchor] Santa has fainted in the heat wave! [short pause] That's right, Santa fainted! [deadpan] Back to you in the studio"
 - Prompt: "Which capital belongs to New Mexico?"
 
 ### New York
@@ -225,7 +225,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Oregon
 - Format: State calls, name the capital.
 - Caller: Sailing west desk
-- Audio line: "Oregon says sail 'em fast toward the capital. Sail 'em points to the city name."
+- Audio line: "Hello, you’ve reached the Oregon yacht club — [beat] terribly exclusive, naturally. [beat] Whether you’ve got a schooner, OR [short pause] a yacht, you ought to sail ’em. [beat] Sail ’em right up the coast, my friend.."
 - Prompt: "Which capital belongs to Oregon?"
 
 ### Pennsylvania
