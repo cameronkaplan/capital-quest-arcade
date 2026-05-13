@@ -787,11 +787,11 @@ function renderHome() {
       <p class="count">${pack.states.length} states</p>
       <span class="status">${pack.status}</span>
       <p class="stars">Stars: ${formatStars(stats.stars || 0)}</p>
-      <p class="play-label">Play Boss Round</p>
+      <p class="play-label">Choose mode</p>
     `;
     button.addEventListener("click", () => {
       appState.selectedRegionId = pack.id;
-      startMode("boss-round");
+      showModes(pack.id);
     });
     els.regionGrid.appendChild(button);
   });
