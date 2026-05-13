@@ -104,8 +104,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Kentucky
 - Format: State calls, name the capital.
-- Caller: Not fried chicken desk
-- Audio line: "Kentucky says the capital is not Louisville and not a bucket of chicken. Think Frank with a fort."
+- Caller: No dogs allowed
+- Audio line: "KFC: can I take your order? Frank: yeah [beat] uh [beat] lemme get two frankfurters, extra mustard. KFC: Sir [beat] this is Kentucky Fried Chicken.[beat] We don't serve hot dogs.."
 - Prompt: "Which capital belongs to Kentucky?"
 
 ### Louisiana
