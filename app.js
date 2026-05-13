@@ -639,7 +639,6 @@ function cacheElements() {
     homeScreen: document.getElementById("homeScreen"),
     modeScreen: document.getElementById("modeScreen"),
     gameScreen: document.getElementById("gameScreen"),
-    editorScreen: document.getElementById("editorScreen"),
     regionGrid: document.getElementById("regionGrid"),
     modeGrid: document.getElementById("modeGrid"),
     modeTitle: document.getElementById("modeTitle"),
@@ -665,13 +664,7 @@ function cacheElements() {
     bestStreak: document.getElementById("bestStreak"),
     weakCount: document.getElementById("weakCount"),
     soundToggle: document.getElementById("soundToggle"),
-    resetProgress: document.getElementById("resetProgress"),
-    openEditor: document.getElementById("openEditor"),
-    closeEditor: document.getElementById("closeEditor"),
-    regionEditor: document.getElementById("regionEditor"),
-    saveRegions: document.getElementById("saveRegions"),
-    restoreRegions: document.getElementById("restoreRegions"),
-    editorMessage: document.getElementById("editorMessage")
+    resetProgress: document.getElementById("resetProgress")
   });
 }
 
@@ -681,10 +674,6 @@ function bindEvents() {
   els.nextQuestion.addEventListener("click", nextQuestion);
   els.soundToggle.addEventListener("click", toggleSound);
   els.resetProgress.addEventListener("click", resetProgress);
-  els.openEditor.addEventListener("click", openEditor);
-  els.closeEditor.addEventListener("click", () => showScreen("home"));
-  els.saveRegions.addEventListener("click", saveRegionEditor);
-  els.restoreRegions.addEventListener("click", restoreDefaultRegions);
 }
 
 async function loadMapData() {
@@ -754,7 +743,7 @@ function validateRegions() {
 
 function showScreen(screenName) {
   appState.currentScreen = screenName;
-  [els.homeScreen, els.modeScreen, els.gameScreen, els.editorScreen].forEach((screen) => {
+  [els.homeScreen, els.modeScreen, els.gameScreen].forEach((screen) => {
     const isActive = screen.id === `${screenName}Screen`;
     screen.hidden = !isActive;
     screen.classList.toggle("active", isActive);
@@ -2566,62 +2555,6 @@ function resetProgress() {
   saveProgress();
   renderHome();
   if (appState.selectedModeId) startMode(appState.selectedModeId);
-}
-
-function openEditor() {
-  els.regionEditor.value = regionPacksToText(regionPacks);
-  els.editorMessage.textContent = "";
-  showScreen("editor");
-}
-
-function saveRegionEditor() {
-  try {
-    const parsed = parseRegionEditor(els.regionEditor.value);
-    regionPacks = parsed;
-    localStorage.setItem(REGION_OVERRIDE_KEY, JSON.stringify(regionPacks.map((pack) => ({ id: pack.id, states: pack.states }))));
-    els.editorMessage.textContent = "Saved. Region tiles now use these lists.";
-    renderHome();
-  } catch (error) {
-    els.editorMessage.textContent = error.message;
-  }
-}
-
-function restoreDefaultRegions() {
-  regionPacks = DEFAULT_REGION_PACKS.map((pack) => ({ ...pack, states: [...pack.states] }));
-  localStorage.removeItem(REGION_OVERRIDE_KEY);
-  els.regionEditor.value = regionPacksToText(regionPacks);
-  els.editorMessage.textContent = "Defaults restored.";
-  renderHome();
-}
-
-function regionPacksToText(packs) {
-  return packs.map((pack) => `${pack.label}: ${pack.states.join(" ")}`).join("\n");
-}
-
-function parseRegionEditor(text) {
-  const idByLabel = new Map(regionPacks.map((pack) => [pack.label.toLowerCase(), pack.id]));
-  const parsed = new Map();
-  text.split(/\n+/).map((line) => line.trim()).filter(Boolean).forEach((line) => {
-    const parts = line.split(":");
-    if (parts.length < 2) throw new Error(`Use "Region: ST ST" format for: ${line}`);
-    const label = parts[0].trim().toLowerCase();
-    const id = idByLabel.get(label);
-    if (!id) throw new Error(`Unknown region "${parts[0].trim()}". Use West, Midwest, Southeast, Northeast.`);
-    const codes = parts.slice(1).join(":").split(/[,\s]+/).map((code) => code.trim().toUpperCase()).filter(Boolean);
-    if (codes.length === 0) throw new Error(`${parts[0].trim()} needs at least one state.`);
-    const invalid = codes.filter((code) => !stateByAbbr.has(code));
-    if (invalid.length) throw new Error(`Unknown state code: ${invalid.join(", ")}`);
-    parsed.set(id, codes);
-  });
-  if (parsed.size !== DEFAULT_REGION_PACKS.length) {
-    throw new Error("Include West, Midwest, Southeast, and Northeast.");
-  }
-  const allCodes = [...parsed.values()].flat();
-  const duplicates = allCodes.filter((code, index) => allCodes.indexOf(code) !== index);
-  if (duplicates.length) throw new Error(`Duplicate state code: ${[...new Set(duplicates)].join(", ")}`);
-  const missing = allAbbrs.filter((abbr) => !allCodes.includes(abbr));
-  if (missing.length) throw new Error(`Missing state code: ${missing.join(", ")}`);
-  return DEFAULT_REGION_PACKS.map((pack) => ({ ...pack, states: [...parsed.get(pack.id)] }));
 }
 
 function getRegion(regionId) {

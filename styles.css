@@ -158,8 +158,7 @@ h3 {
 
 .screen-heading,
 .game-topbar,
-.map-header,
-.editor-actions {
+.map-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -1580,32 +1579,6 @@ h3 {
   padding: 24px;
   font-family: "Courier New", monospace;
   font-weight: 700;
-}
-
-.editor-help {
-  max-width: 760px;
-  line-height: 1.45;
-}
-
-.editor-screen textarea {
-  width: 100%;
-  min-height: 220px;
-  border: 3px solid var(--line);
-  border-radius: var(--radius);
-  padding: 14px;
-  background: #fffdf2;
-  font-family: "Courier New", monospace;
-  font-size: 0.96rem;
-}
-
-.editor-actions {
-  justify-content: flex-start;
-  margin-top: 12px;
-}
-
-.editor-message {
-  margin: 12px 0 0;
-  font-weight: 800;
 }
 
 .source-footer {
