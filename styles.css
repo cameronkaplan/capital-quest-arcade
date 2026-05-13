@@ -265,6 +265,12 @@ h3 {
   background: #f08c7b;
 }
 
+.study-guide-card {
+  background:
+    linear-gradient(135deg, rgba(255, 248, 223, 0.28) 0 18%, transparent 18% 36%, rgba(255, 248, 223, 0.18) 36% 54%, transparent 54%),
+    #f2d36b;
+}
+
 .mode-card {
   min-height: 150px;
   background: #fff5c7;
@@ -564,6 +570,21 @@ h3 {
   outline: none;
 }
 
+.game-screen.study-mode .state-shape.study-audio-ready:hover,
+.game-screen.study-mode .state-shape.study-audio-ready:focus {
+  fill: #ffe480;
+}
+
+.game-screen.study-mode .state-shape.out-region:hover,
+.game-screen.study-mode .state-shape.out-region:focus {
+  fill: #c5d8c9;
+}
+
+.study-guide-panel {
+  display: grid;
+  gap: 12px;
+}
+
 .game-screen.court-mode .state-shape {
   stroke: #1d1914;
 }
@@ -672,6 +693,10 @@ h3 {
   background:
     linear-gradient(90deg, rgba(242, 202, 75, 0.14) 1px, transparent 1px) 0 0 / 32px 32px,
     #291d18;
+}
+
+.game-screen.study-mode {
+  background: rgba(255, 248, 223, 0.96);
 }
 
 .game-screen.square-mode .quiz-console,

@@ -471,7 +471,7 @@ const BONUS_GAMES = [
       { targetAbbr: "AK", contextAbbrs: ["AK", "HI", "WA"], caller: "Juneau on line two", line: "Ch-ch-chilly out here. I'll ask ya real quick. Juneau where I'm callin' from? I'm way up here, freezin' my eyebrows off.", prompt: "Juneau is the capital of which state?", choices: ["AK", "HI", "WA", "OR"], audio: "assets/audio/capital-juneau-alaska.mp3" },
       { targetAbbr: "CA", contextAbbrs: ["CA", "OR", "NV"], caller: "Sacramento on line three", line: "Yoooo. We're out here catchin' waves, wearin' sacred mementos around our necks. Totally spiritual, bro.", prompt: "Sacramento belongs to which state?", choices: ["CA", "OR", "NV", "AZ"], audio: "assets/audio/capital-sacramento-california.mp3" },
       { targetAbbr: "TN", contextAbbrs: ["TN", "KY", "MS"], caller: "Nashville on line four", line: "Music City calling. I have guitars, a state capital job, and zero patience for Memphis guesses.", prompt: "Nashville is the capital of which state?", choices: ["TN", "KY", "MS", "AR"] },
-      { targetAbbr: "CO", contextAbbrs: ["CO", "WY", "UT"], caller: "Denver on line five", line: "Mile-high caller here. I am Denver, and I need my mountain state.", prompt: "Denver is the capital of which state?", choices: ["CO", "WY", "UT", "NM"] },
+      { targetAbbr: "CO", answerKind: "capital", contextAbbrs: ["CO", "WY", "UT"], caller: "Mile-high caller", line: "Colorado cold? Buy dense fur. Dense fur! The coat has a coat.", prompt: "Which capital belongs to Colorado?", choices: ["CO", "WY", "UT", "NM"], audio: "assets/audio/capital-denver-colorado.mp3" },
       { targetAbbr: "MA", contextAbbrs: ["MA", "RI", "CT"], caller: "Boston on line six", line: "This is Boston. Please pahk me in the right New England state.", prompt: "Boston is the capital of which state?", choices: ["MA", "RI", "CT", "NH"] },
       { targetAbbr: "IL", contextAbbrs: ["IL", "IN", "IA"], caller: "Bart Simpson", line: "Eat my shorts! I'm Bart Simpson, the coolest kid in Springfield. The capital of what state?", prompt: "Springfield is the capital of which state?", choices: ["IL", "IN", "IA", "MO"], audio: "assets/audio/capital-springfield-illinois.mp3" },
       { targetAbbr: "IN", contextAbbrs: ["IN", "IL", "OH"], caller: "I-State emergency", line: "Ladies and gentlemen, we've got a car absolutely flyin' here at the Indy 500. Somebody better call the Indiana police. Wait, the Indianapolis?", prompt: "Indianapolis is the capital of which state?", choices: ["IN", "IL", "OH", "IA"], audio: "assets/audio/capital-indianapolis-indiana.mp3" },
@@ -487,7 +487,7 @@ const BONUS_GAMES = [
       { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Hi there, this is Miss Ouri callin'. Me and Mr. Jefferson went down to the city. Jefferson City, that's where we landed. But what state?", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"], audio: "assets/audio/capital-jefferson-city-missouri.mp3" },
       { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Shy Anne is calling from Cheyenne. Why oh why? And what state is she in?", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" },
       { targetAbbr: "AL", answerKind: "capital", contextAbbrs: ["AL", "MS", "GA"], caller: "Mountain-gum dispatch", line: "Alabama is on the line with Al on a mountain of gum. The capital sounds like Monty's gum mountain.", prompt: "Which capital belongs to Alabama?", choices: ["AL", "MS", "GA", "TN"] },
-      { targetAbbr: "AZ", answerKind: "capital", contextAbbrs: ["AZ", "NM", "UT"], caller: "Desert bird desk", line: "Arizona says a fiery bird keeps rising out of the desert. That bird is also the capital clue.", prompt: "Which capital belongs to Arizona?", choices: ["AZ", "NM", "UT", "CO"], audio: "assets/audio/capital-phoenix-arizona.mp3" },
+      { targetAbbr: "AZ", answerKind: "capital", contextAbbrs: ["AZ", "NM", "UT"], caller: "Desert bird desk", line: "Arizona calling. The air in the zone I'm in is so hot, even the birds burst into flames and start over.", prompt: "Which capital belongs to Arizona?", choices: ["AZ", "NM", "UT", "CO"], audio: "assets/audio/capital-phoenix-arizona.mp3" },
       { targetAbbr: "AR", answerKind: "capital", contextAbbrs: ["AR", "LA", "MS"], caller: "Tiny boulder bureau", line: "Arkansas found a very small boulder in its pocket. The pocket rock is the capital clue.", prompt: "Which capital belongs to Arkansas?", choices: ["AR", "LA", "MS", "OK"] },
       { targetAbbr: "CT", answerKind: "capital", contextAbbrs: ["CT", "RI", "MA"], caller: "Heart monitor line", line: "Connecticut is sending a heart-shaped message. Follow the heart to the capital.", prompt: "Which capital belongs to Connecticut?", choices: ["CT", "RI", "MA", "NJ"] },
       { targetAbbr: "DE", answerKind: "capital", contextAbbrs: ["DE", "MD", "NJ"], caller: "Driving-over desk", line: "Delaware says it is driving over to the capital. Over, dover, close enough for the map.", prompt: "Which capital belongs to Delaware?", choices: ["DE", "MD", "NJ", "PA"] },
@@ -499,15 +499,15 @@ const BONUS_GAMES = [
       { targetAbbr: "ME", answerKind: "capital", contextAbbrs: ["ME", "NH", "VT"], caller: "Windy vacation desk", line: "Maine says an August gust just hit the coast. August plus a gust points to the capital.", prompt: "Which capital belongs to Maine?", choices: ["ME", "NH", "VT", "MA"] },
       { targetAbbr: "MD", answerKind: "capital", contextAbbrs: ["MD", "DE", "VA"], caller: "Naval map desk", line: "Maryland says Ann borrowed a police hat near the water. Ann-a-police is the clue.", prompt: "Which capital belongs to Maryland?", choices: ["MD", "DE", "VA", "PA"] },
       { targetAbbr: "MS", answerKind: "capital", contextAbbrs: ["MS", "AL", "LA"], caller: "Moonwalk river line", line: "Mississippi is moonwalking down the river with a famous Jackson. That name is the capital clue.", prompt: "Which capital belongs to Mississippi?", choices: ["MS", "AL", "LA", "TN"] },
-      { targetAbbr: "MT", answerKind: "capital", contextAbbrs: ["MT", "ID", "WY"], caller: "Last chance tea shop", line: "Montana says Helen wants lemon tea, Anna. Helen-a, Montana. Say it fast.", prompt: "Which capital belongs to Montana?", choices: ["MT", "ID", "WY", "CO"] },
-      { targetAbbr: "NV", answerKind: "capital", contextAbbrs: ["NV", "CA", "UT"], caller: "Desert car line", line: "Nevada needs a car, son, to cross the desert. Car-son is the capital clue.", prompt: "Which capital belongs to Nevada?", choices: ["NV", "CA", "UT", "AZ"] },
-      { targetAbbr: "NH", answerKind: "capital", contextAbbrs: ["NH", "VT", "ME"], caller: "Agreeable ham desk", line: "New Hampshire says everybody agrees about the capital. Agreement means concord.", prompt: "Which capital belongs to New Hampshire?", choices: ["NH", "VT", "ME", "MA"] },
+      { targetAbbr: "MT", contextAbbrs: ["MT", "ID", "WY"], caller: "Helen on the Mountain", line: "Hi there, sugar. It's Helen, and I'm stuck up here in the Elkhorn mountains. Won't you give old Helen a hand to help me off this mountain?", prompt: "Helena is the capital of which state?", choices: ["MT", "ID", "WY", "CO"], audio: "assets/audio/capital-helena-montana.mp3" },
+      { targetAbbr: "NV", answerKind: "capital", contextAbbrs: ["NV", "CA", "UT"], caller: "Car-less Cowboy", line: "Well I've never had a car, son. Not in the city, anyway. A horse won't parallel park.", prompt: "Which capital belongs to Nevada?", choices: ["NV", "CA", "UT", "AZ"], audio: "assets/audio/capital-carson-city-nevada.m4a" },
+      { targetAbbr: "NH", answerKind: "capital", contextAbbrs: ["NH", "VT", "ME"], caller: "Victorious rodent", line: "I'm the new hamster. I feel so clean, and I just conquered my new home.", prompt: "Which capital belongs to New Hampshire?", choices: ["NH", "VT", "ME", "MA"], audio: "assets/audio/capital-concord-new-hampshire.m4a" },
       { targetAbbr: "NJ", answerKind: "capital", contextAbbrs: ["NJ", "NY", "DE"], caller: "Jersey train line", line: "New Jersey says Trent has on a new jersey. Trent-on is the capital clue.", prompt: "Which capital belongs to New Jersey?", choices: ["NJ", "NY", "DE", "PA"] },
-      { targetAbbr: "NM", answerKind: "capital", contextAbbrs: ["NM", "AZ", "CO"], caller: "Santa desert desk", line: "New Mexico says Santa fainted in the heat. Santa Fe is hiding in that sentence.", prompt: "Which capital belongs to New Mexico?", choices: ["NM", "AZ", "CO", "TX"] },
+      { targetAbbr: "NM", answerKind: "capital", contextAbbrs: ["NM", "AZ", "CO"], caller: "Santa desert desk", line: "We interrupt with urgent New Mexico weather news. Santa has fainted in the heat wave. That's right, Santa fainted. Back to you in the studio.", prompt: "Which capital belongs to New Mexico?", choices: ["NM", "AZ", "CO", "TX"], audio: "assets/audio/capital-santa-fe-new-mexico.mp3" },
       { targetAbbr: "NY", answerKind: "capital", contextAbbrs: ["NY", "NJ", "PA"], caller: "Not the big city desk", line: "New York says the famous city is not the capital. All bunnies go upstate for the clue.", prompt: "Which capital belongs to New York?", choices: ["NY", "NJ", "PA", "CT"] },
       { targetAbbr: "NC", answerKind: "capital", contextAbbrs: ["NC", "SC", "VA"], caller: "Pep rally line", line: "North Carolina says everyone rally at the capital. Rally sounds like the clue.", prompt: "Which capital belongs to North Carolina?", choices: ["NC", "SC", "VA", "TN"] },
       { targetAbbr: "OK", answerKind: "capital", contextAbbrs: ["OK", "AR", "TX"], caller: "Oak tree city desk", line: "Oklahoma keeps it extremely straightforward. The state name comes right back with city at the end.", prompt: "Which capital belongs to Oklahoma?", choices: ["OK", "AR", "TX", "KS"] },
-      { targetAbbr: "OR", answerKind: "capital", contextAbbrs: ["OR", "WA", "CA"], caller: "Sailing west desk", line: "Oregon says sail 'em fast toward the capital. Sail 'em points to the city name.", prompt: "Which capital belongs to Oregon?", choices: ["OR", "WA", "CA", "ID"] },
+      { targetAbbr: "OR", answerKind: "capital", contextAbbrs: ["OR", "WA", "CA"], caller: "Sailing west desk", line: "Hello, you've reached the Oregon yacht club. Terribly exclusive, naturally. Whether you've got a schooner, OR a yacht, you ought to sail 'em. Sail 'em right up the coast, my friend.", prompt: "Which capital belongs to Oregon?", choices: ["OR", "WA", "CA", "ID"], audio: "assets/audio/capital-salem-oregon.mp3" },
       { targetAbbr: "PA", answerKind: "capital", contextAbbrs: ["PA", "NY", "MD"], caller: "Hairy burger line", line: "Pennsylvania says the capital is not Philly or Pittsburgh. Think hairy burger.", prompt: "Which capital belongs to Pennsylvania?", choices: ["PA", "NY", "MD", "DE"] },
       { targetAbbr: "RI", answerKind: "capital", contextAbbrs: ["RI", "CT", "MA"], caller: "Tiny island desk", line: "Rhode Island says the answer is proven-dense. Providence is hiding in that sound.", prompt: "Which capital belongs to Rhode Island?", choices: ["RI", "CT", "MA", "VT"] },
       { targetAbbr: "SC", answerKind: "capital", contextAbbrs: ["SC", "NC", "GA"], caller: "Column of bees line", line: "South Carolina says Caroline's column of bees flew south. Column-bee-a is the clue.", prompt: "Which capital belongs to South Carolina?", choices: ["SC", "NC", "GA", "VA"] },
@@ -617,6 +617,9 @@ const appState = {
   introUnlockTimer: null,
   activeIntroAudio: null,
   activeReplayAudio: null,
+  activeStudyAudio: null,
+  studyAudioLocked: false,
+  studyAudioUnlockTimer: null,
   lastClickedAbbr: null,
   advanceTimer: null
 };
@@ -670,7 +673,13 @@ function cacheElements() {
 
 function bindEvents() {
   els.backHome.addEventListener("click", () => showScreen("home"));
-  els.backModes.addEventListener("click", () => showModes(appState.selectedRegionId));
+  els.backModes.addEventListener("click", () => {
+    if (isStudyGuideActive()) {
+      showScreen("home");
+      return;
+    }
+    showModes(appState.selectedRegionId);
+  });
   els.nextQuestion.addEventListener("click", nextQuestion);
   els.soundToggle.addEventListener("click", toggleSound);
   els.resetProgress.addEventListener("click", resetProgress);
@@ -742,6 +751,8 @@ function validateRegions() {
 }
 
 function showScreen(screenName) {
+  stopStudyAudio();
+  clearIntroLock();
   appState.currentScreen = screenName;
   [els.homeScreen, els.modeScreen, els.gameScreen].forEach((screen) => {
     const isActive = screen.id === `${screenName}Screen`;
@@ -784,6 +795,55 @@ function renderHome() {
     });
     els.regionGrid.appendChild(button);
   });
+  renderStudyGuideTile();
+}
+
+function renderStudyGuideTile() {
+  const audioCount = getCapitalCallAudioMap().size;
+  const button = document.createElement("button");
+  button.type = "button";
+  button.className = "region-card study-guide-card";
+  button.dataset.region = "study-guide";
+  button.innerHTML = `
+    <p class="section-label">Study mode</p>
+    <h3>Mnemonic Study Guide</h3>
+    <p class="count">${audioCount} audio states</p>
+    <span class="status">Map study</span>
+    <p class="stars">No score, no timer</p>
+    <p class="play-label">Open guide</p>
+  `;
+  button.addEventListener("click", startMnemonicStudyGuide);
+  els.regionGrid.appendChild(button);
+}
+
+function startMnemonicStudyGuide() {
+  stopStudyAudio();
+  clearAdvanceTimer();
+  appState.selectedRegionId = "all";
+  appState.selectedModeId = "mnemonic-study-guide";
+  appState.session = null;
+  appState.currentQuestion = null;
+  appState.driveData = null;
+  appState.lastClickedAbbr = null;
+  els.backModes.textContent = "Regions";
+  els.gameScreen.classList.remove("court-mode", "drive-mode", "tip-mode", "square-mode", "hotline-mode", "callin-mode", "interruption-mode");
+  els.gameScreen.classList.add("study-mode");
+  els.gameRegion.textContent = "All States / Audio study";
+  els.gameTitle.textContent = "Mnemonic Study Guide";
+  els.sessionMeter.textContent = `${getCapitalCallAudioMap().size} audio states`;
+  els.streakPill.textContent = "Study mode";
+  els.scorePill.textContent = "No score";
+  els.modeBadge.textContent = "Tap a yellow state to hear its Capital Call-In.";
+  els.questionPrompt.textContent = "Capital Call-In audio map";
+  els.answerArea.innerHTML = `
+    <div class="study-guide-panel">
+      <p class="arcade-status">Yellow states have audio. Muted states are coming soon. Click any state for the memory hook and capital fact.</p>
+    </div>
+  `;
+  clearFeedback();
+  showScreen("game");
+  els.gameScreen.classList.add("study-mode");
+  renderMap();
 }
 
 function showModes(regionId) {
@@ -809,6 +869,9 @@ function showModes(regionId) {
 }
 
 function startMode(modeId) {
+  stopStudyAudio();
+  els.gameScreen.classList.remove("study-mode");
+  els.backModes.textContent = "Modes";
   appState.selectedModeId = modeId;
   const region = getRegion(appState.selectedRegionId);
   const mode = getMode(modeId);
@@ -1260,6 +1323,8 @@ function renderQuestion() {
   const question = appState.currentQuestion;
   const session = appState.session;
   clearIntroLock();
+  stopStudyAudio();
+  els.gameScreen.classList.remove("study-mode");
   els.gameScreen.classList.toggle("court-mode", question.kind === "court");
   els.gameScreen.classList.toggle("drive-mode", question.kind === "drive");
   els.gameScreen.classList.toggle("tip-mode", question.kind === "tip");
@@ -1760,7 +1825,8 @@ function renderMap() {
   if (!geoData) return;
   const region = getRegion(appState.selectedRegionId || "all");
   const question = appState.currentQuestion;
-  const activeSet = new Set(region.states);
+  const studyAudioMap = isStudyGuideActive() ? getCapitalCallAudioMap() : null;
+  const activeSet = studyAudioMap || new Set(region.states);
   const targetAbbr = question ? question.targetAbbr : null;
   const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   svg.setAttribute("viewBox", "0 0 960 600");
@@ -1792,6 +1858,7 @@ function renderMap() {
     path.classList.add("state-shape", "clickable");
     path.classList.toggle("in-region", activeSet.has(abbr));
     path.classList.toggle("out-region", !activeSet.has(abbr));
+    path.classList.toggle("study-audio-ready", Boolean(studyAudioMap && studyAudioMap.has(abbr)));
     if (shouldPreviewTarget(question) && abbr === targetAbbr) path.classList.add("target-preview");
     if (appState.lastClickedAbbr === abbr && abbr !== targetAbbr) path.classList.add("missed");
     if (appState.session && appState.session.answered && abbr === targetAbbr) path.classList.add("correct");
@@ -1853,6 +1920,7 @@ function removeMapCoach() {
 function dismissMapCoach() {
   const coach = els.mapStage.querySelector(".map-coach");
   const shouldAdvance = coach && coach.dataset.advanceOnDismiss === "true";
+  if (isStudyGuideActive()) stopStudyAudio();
   removeMapCoach();
   if (shouldAdvance) {
     clearAdvanceTimer();
@@ -2187,6 +2255,10 @@ function projectPoint(lonInput, lat, abbr) {
 }
 
 function handleMapClick(abbr) {
+  if (isStudyGuideActive()) {
+    handleStudyMapClick(abbr);
+    return;
+  }
   const question = appState.currentQuestion;
   const session = appState.session;
   if (!question || question.kind !== "map" || session.answered) return;
@@ -2452,6 +2524,74 @@ function getCapitalHelp(abbr) {
     mnemonic: help ? help.mnemonic : state.mnemonic.text,
     fact: help ? help.fact : `${state.capital} is the capital of ${state.name}.`
   };
+}
+
+function isStudyGuideActive() {
+  return appState.currentScreen === "game" && appState.selectedModeId === "mnemonic-study-guide";
+}
+
+function getCapitalCallAudioMap() {
+  const game = BONUS_GAMES.find((candidate) => candidate.id === "capital-call-in");
+  const map = new Map();
+  if (!game) return map;
+  game.calls.forEach((call) => {
+    if (call.audio) map.set(call.targetAbbr, call);
+  });
+  return map;
+}
+
+function handleStudyMapClick(abbr) {
+  if (appState.studyAudioLocked) return;
+  const state = stateByAbbr.get(abbr);
+  if (!state) return;
+  const call = getCapitalCallAudioMap().get(abbr);
+  if (!call) {
+    showMapCoach("try", "Audio coming soon", `${state.name}'s Capital Call-In audio is not ready yet.`, state, false);
+    return;
+  }
+  showMapCoach("good", `${state.capital}, ${state.name}`, call.line, state, false);
+  playStudyAudio(call.audio);
+}
+
+function playStudyAudio(src) {
+  stopStudyAudio();
+  if (!progress.sound) return;
+  ensureAudio();
+  const audio = playAudioAsset(src, 0.78);
+  if (!audio) return;
+  appState.activeStudyAudio = audio;
+  appState.studyAudioLocked = true;
+  const unlock = () => unlockStudyAudio(audio);
+  audio.addEventListener("ended", unlock, { once: true });
+  audio.addEventListener("error", unlock, { once: true });
+  audio.addEventListener("loadedmetadata", () => {
+    if (Number.isFinite(audio.duration) && audio.duration > 0) {
+      if (appState.studyAudioUnlockTimer) window.clearTimeout(appState.studyAudioUnlockTimer);
+      appState.studyAudioUnlockTimer = window.setTimeout(() => unlockStudyAudio(audio), (audio.duration * 1000) + 300);
+    }
+  }, { once: true });
+}
+
+function unlockStudyAudio(audio) {
+  if (audio && appState.activeStudyAudio && appState.activeStudyAudio !== audio) return;
+  if (appState.studyAudioUnlockTimer) {
+    window.clearTimeout(appState.studyAudioUnlockTimer);
+    appState.studyAudioUnlockTimer = null;
+  }
+  appState.activeStudyAudio = null;
+  appState.studyAudioLocked = false;
+}
+
+function stopStudyAudio() {
+  if (appState.studyAudioUnlockTimer) {
+    window.clearTimeout(appState.studyAudioUnlockTimer);
+    appState.studyAudioUnlockTimer = null;
+  }
+  if (appState.activeStudyAudio) {
+    appState.activeStudyAudio.pause();
+    appState.activeStudyAudio = null;
+  }
+  appState.studyAudioLocked = false;
 }
 
 function isCapitalQuestion(question) {
