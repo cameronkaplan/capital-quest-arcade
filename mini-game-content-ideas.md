@@ -56,8 +56,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Florida
 - Format: State calls, name the capital.
-- Caller: Tall sunshine hotline
-- Audio line: "Florida is tall and sunny today. The capital starts with tall, too."
+- Caller: Sunshine State Real Estate
+- Audio line: "Hi there— [beat] Florida real estate agent here. [beat] You’re gonna [excited emphasis]love this: a beautiful tall house by the [emphasize] sea. [beat] Great views, charm, and the name practically sells itself. [beat] Tall house, see?"
 - Prompt: "Which capital belongs to Florida?"
 
 ### Georgia
@@ -201,7 +201,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### North Carolina
 - Format: State calls, name the capital.
 - Caller: Pep rally line
-- Audio line: "North Carolina says everyone rally at the capital. Rally sounds like the clue."
+- Audio line: "Heyyy, North Side— [beat] it’s Caroline! [beat] We’re at the pep rally, and I need [excited emphasis] everybody loud! [beat] [cheerleader voice]Gooooooo, North! [woo]."
 - Prompt: "Which capital belongs to North Carolina?"
 
 ### North Dakota
@@ -259,10 +259,10 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 - Prompt: "Nashville is the capital of which state?"
 
 ### Texas
-- Format: State calls, name the capital.
-- Caller: Big guitar desk
-- Audio line: "Texas says the capital has music, bats, and a guitar tuned in the middle of the state."
-- Prompt: "Which capital belongs to Texas?"
+- Format: Capital calls, name the state.
+- Caller: Is your GPS working?
+- Audio line: "Howdy— [beat] this state is [long drawn out] soooo big, you might get lost in it. [beat] Lost in… [beat] Austin. [beat] Well shoot, there’s your capital clue."
+- Prompt: "Austin is the capital of which state?"
 
 ### Utah
 - Format: State calls, name the capital.
