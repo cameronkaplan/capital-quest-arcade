@@ -2405,7 +2405,7 @@ function showFeedback(kind, title, text, abbr, showNext, options = {}) {
     els.feedbackPanel.hidden = true;
     const coachOptions = buildCoachOptions(appState.currentQuestion, state, {
       ...options,
-      advanceOnDismiss: kind === "good" && !showNext,
+      advanceOnDismiss: (kind === "good" && !showNext) || (showNext && appState.session && appState.session.answered),
       feedbackKind: kind
     });
     showMapCoach(kind, title, text, state, showNext, coachOptions);
