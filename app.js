@@ -468,8 +468,8 @@ const BONUS_GAMES = [
     reward: 1,
     calls: [
       { targetAbbr: "ID", contextAbbrs: ["ID", "MT", "WY"], caller: "Cranky Gramps", line: "Listen here, if I'd a hoe, I'd make those boys see the right way to weed a garden. Pull from the roots, boys. The roots.", prompt: "Boise is calling from which state?", choices: ["ID", "MT", "WY", "UT"], audio: "assets/audio/capital-boise-idaho.mp3" },
-      { targetAbbr: "AK", contextAbbrs: ["AK", "HI", "WA"], caller: "Juneau on line two", line: "Juneau the answer? I am cold, far northwest, and absolutely not Anchorage.", prompt: "Juneau is the capital of which state?", choices: ["AK", "HI", "WA", "OR"] },
-      { targetAbbr: "CA", contextAbbrs: ["CA", "OR", "NV"], caller: "Sacramento on line three", line: "Everyone yells Los Angeles or San Francisco. I am Sacramento, asking for basic respect.", prompt: "Sacramento is the capital of which state?", choices: ["CA", "OR", "NV", "AZ"] },
+      { targetAbbr: "AK", contextAbbrs: ["AK", "HI", "WA"], caller: "Juneau on line two", line: "Ch-ch-chilly out here. I'll ask ya real quick. Juneau where I'm callin' from? I'm way up here, freezin' my eyebrows off.", prompt: "Juneau is the capital of which state?", choices: ["AK", "HI", "WA", "OR"], audio: "assets/audio/capital-juneau-alaska.mp3" },
+      { targetAbbr: "CA", contextAbbrs: ["CA", "OR", "NV"], caller: "Sacramento on line three", line: "Yoooo. We're out here catchin' waves, wearin' sacred mementos around our necks. Totally spiritual, bro.", prompt: "Sacramento belongs to which state?", choices: ["CA", "OR", "NV", "AZ"], audio: "assets/audio/capital-sacramento-california.mp3" },
       { targetAbbr: "TN", contextAbbrs: ["TN", "KY", "MS"], caller: "Nashville on line four", line: "Music City calling. I have guitars, a state capital job, and zero patience for Memphis guesses.", prompt: "Nashville is the capital of which state?", choices: ["TN", "KY", "MS", "AR"] },
       { targetAbbr: "CO", contextAbbrs: ["CO", "WY", "UT"], caller: "Denver on line five", line: "Mile-high caller here. I am Denver, and I need my mountain state.", prompt: "Denver is the capital of which state?", choices: ["CO", "WY", "UT", "NM"] },
       { targetAbbr: "MA", contextAbbrs: ["MA", "RI", "CT"], caller: "Boston on line six", line: "This is Boston. Please pahk me in the right New England state.", prompt: "Boston is the capital of which state?", choices: ["MA", "RI", "CT", "NH"] },
@@ -487,13 +487,13 @@ const BONUS_GAMES = [
       { targetAbbr: "MO", contextAbbrs: ["MO", "IA", "IL"], caller: "Not St. Louis desk", line: "Hi there, this is Miss Ouri callin'. Me and Mr. Jefferson went down to the city. Jefferson City, that's where we landed. But what state?", prompt: "Jefferson City is the capital of which state?", choices: ["MO", "OH", "IL", "IA"], audio: "assets/audio/capital-jefferson-city-missouri.mp3" },
       { targetAbbr: "WY", contextAbbrs: ["WY", "CO", "MT"], caller: "Cheyenne range line", line: "Shy Anne is calling from Cheyenne. Why oh why? And what state is she in?", prompt: "Cheyenne is the capital of which state?", choices: ["WY", "CO", "MT", "NE"], audio: "assets/audio/capital-cheyanne-wyoming.mp3" },
       { targetAbbr: "AL", answerKind: "capital", contextAbbrs: ["AL", "MS", "GA"], caller: "Mountain-gum dispatch", line: "Alabama is on the line with Al on a mountain of gum. The capital sounds like Monty's gum mountain.", prompt: "Which capital belongs to Alabama?", choices: ["AL", "MS", "GA", "TN"] },
-      { targetAbbr: "AZ", answerKind: "capital", contextAbbrs: ["AZ", "NM", "UT"], caller: "Desert bird desk", line: "Arizona says a fiery bird keeps rising out of the desert. That bird is also the capital clue.", prompt: "Which capital belongs to Arizona?", choices: ["AZ", "NM", "UT", "CO"] },
+      { targetAbbr: "AZ", answerKind: "capital", contextAbbrs: ["AZ", "NM", "UT"], caller: "Desert bird desk", line: "Arizona says a fiery bird keeps rising out of the desert. That bird is also the capital clue.", prompt: "Which capital belongs to Arizona?", choices: ["AZ", "NM", "UT", "CO"], audio: "assets/audio/capital-phoenix-arizona.mp3" },
       { targetAbbr: "AR", answerKind: "capital", contextAbbrs: ["AR", "LA", "MS"], caller: "Tiny boulder bureau", line: "Arkansas found a very small boulder in its pocket. The pocket rock is the capital clue.", prompt: "Which capital belongs to Arkansas?", choices: ["AR", "LA", "MS", "OK"] },
       { targetAbbr: "CT", answerKind: "capital", contextAbbrs: ["CT", "RI", "MA"], caller: "Heart monitor line", line: "Connecticut is sending a heart-shaped message. Follow the heart to the capital.", prompt: "Which capital belongs to Connecticut?", choices: ["CT", "RI", "MA", "NJ"] },
       { targetAbbr: "DE", answerKind: "capital", contextAbbrs: ["DE", "MD", "NJ"], caller: "Driving-over desk", line: "Delaware says it is driving over to the capital. Over, dover, close enough for the map.", prompt: "Which capital belongs to Delaware?", choices: ["DE", "MD", "NJ", "PA"] },
       { targetAbbr: "FL", answerKind: "capital", contextAbbrs: ["FL", "GA", "AL"], caller: "Tall sunshine hotline", line: "Florida is tall and sunny today. The capital starts with tall, too.", prompt: "Which capital belongs to Florida?", choices: ["FL", "GA", "AL", "SC"] },
       { targetAbbr: "GA", answerKind: "capital", contextAbbrs: ["GA", "AL", "SC"], caller: "Peach airport desk", line: "Georgia is calling from the big airport city. The capital clue is traffic, peaches, and a very busy skyline.", prompt: "Which capital belongs to Georgia?", choices: ["GA", "AL", "SC", "NC"] },
-      { targetAbbr: "HI", answerKind: "capital", contextAbbrs: ["HI", "AK", "CA"], caller: "Island hello line", line: "Hawaii says hello twice, then adds Lulu at the end. That hello-Lulu sound points to the capital.", prompt: "Which capital belongs to Hawaii?", choices: ["HI", "AK", "CA", "WA"] },
+      { targetAbbr: "HI", answerKind: "capital", contextAbbrs: ["HI", "AK", "CA"], caller: "Island hello line", line: "Lou one: Aloha, this is Lou calling from Hawaii! Lou two: This is also Lou! Host: Hello Lou and Lou!", prompt: "Which capital belongs to Hawaii?", choices: ["HI", "AK", "CA", "WA"], audio: "assets/audio/capital-honolulu-hawaii.mp3" },
       { targetAbbr: "KY", answerKind: "capital", contextAbbrs: ["KY", "TN", "WV"], caller: "Not fried chicken desk", line: "Kentucky says the capital is not Louisville and not a bucket of chicken. Think Frank with a fort.", prompt: "Which capital belongs to Kentucky?", choices: ["KY", "TN", "WV", "VA"] },
       { targetAbbr: "LA", answerKind: "capital", contextAbbrs: ["LA", "MS", "AR"], caller: "Red baton relay", line: "Louisiana is passing a red baton down the river. The baton is the capital clue.", prompt: "Which capital belongs to Louisiana?", choices: ["LA", "MS", "AR", "TX"] },
       { targetAbbr: "ME", answerKind: "capital", contextAbbrs: ["ME", "NH", "VT"], caller: "Windy vacation desk", line: "Maine says an August gust just hit the coast. August plus a gust points to the capital.", prompt: "Which capital belongs to Maine?", choices: ["ME", "NH", "VT", "MA"] },
@@ -616,6 +616,7 @@ const appState = {
   introLocked: false,
   introUnlockTimer: null,
   activeIntroAudio: null,
+  activeReplayAudio: null,
   lastClickedAbbr: null,
   advanceTimer: null
 };
@@ -1416,6 +1417,7 @@ function renderArcadeMiniControls(question) {
     ${renderMiniVisual(question)}
     <p class="arcade-caller">${question.caller || "Arcade desk"}</p>
     <p class="arcade-line">${question.line || question.clue}</p>
+    ${renderReplayAudioButton(question)}
     <p id="miniStatus" class="arcade-status">Listen first. Choices unlock after the intro.</p>
     <div class="arcade-choices"></div>
   `;
@@ -1430,7 +1432,16 @@ function renderArcadeMiniControls(question) {
     button.addEventListener("click", () => handleMiniChoice(choice.abbr, button));
     choicesContainer.appendChild(button);
   });
+  const replayButton = panel.querySelector("[data-replay-audio]");
+  if (replayButton) {
+    replayButton.addEventListener("click", () => replayMiniAudio(replayButton.dataset.replayAudio));
+  }
   els.answerArea.appendChild(panel);
+}
+
+function renderReplayAudioButton(question) {
+  if (question.kind !== "call-in" || !question.audio) return "";
+  return `<button class="utility-button replay-audio-button" type="button" disabled data-intro-locked="true" data-replay-audio="${escapeHtml(question.audio)}">Replay audio</button>`;
 }
 
 function renderMiniVisual(question) {
@@ -2257,6 +2268,7 @@ function handleMiniChoice(abbr, button) {
   const question = appState.currentQuestion;
   const session = appState.session;
   if (!isChoiceMiniQuestion(question) || session.answered || appState.introLocked) return;
+  stopReplayAudio();
   ensureAudio();
   if (abbr === question.targetAbbr) {
     const buttons = [...els.answerArea.querySelectorAll(".arcade-choice")];
@@ -2771,6 +2783,7 @@ function clearIntroLock() {
     appState.activeIntroAudio.pause();
     appState.activeIntroAudio = null;
   }
+  stopReplayAudio();
   appState.introLocked = false;
   removeMiniBumper();
 }
@@ -2935,6 +2948,33 @@ function playAudioAsset(src, volume = 0.7) {
     // Browser autoplay rules may block clips until after a gesture; tones still cover that case.
   });
   return audio;
+}
+
+function replayMiniAudio(src) {
+  if (!src || appState.introLocked) return;
+  ensureAudio();
+  stopReplayAudio();
+  updateMiniStatus("Replaying the call...");
+  const audio = playAudioAsset(src, 0.78);
+  if (!audio) {
+    updateMiniStatus("Sound is off. Turn sound on to replay the call.");
+    return;
+  }
+  appState.activeReplayAudio = audio;
+  audio.addEventListener("ended", () => {
+    if (appState.activeReplayAudio === audio) appState.activeReplayAudio = null;
+    updateMiniStatus("Pick the answer that solves it.");
+  }, { once: true });
+  audio.addEventListener("error", () => {
+    if (appState.activeReplayAudio === audio) appState.activeReplayAudio = null;
+    updateMiniStatus("Audio did not play. Pick the answer that solves it.");
+  }, { once: true });
+}
+
+function stopReplayAudio() {
+  if (!appState.activeReplayAudio) return;
+  appState.activeReplayAudio.pause();
+  appState.activeReplayAudio = null;
 }
 
 function updateCourtStatus(message) {

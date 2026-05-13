@@ -15,7 +15,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Alaska
 - Format: Capital calls, name the state.
 - Caller: Juneau on line two
-- Audio line: "Juneau the answer? I am cold, far northwest, and absolutely not Anchorage."
+- Audio line: "J[teeth chattering]Ch-ch-chilly out here— [beat] I’ll ask ya real quick. [beat] Juneau where I’m [questioning] callin’ from? [beat] I’m [excited emphais]way up here, freezin’ my eyebrows off [chuckles]"
 - Prompt: "Juneau is the capital of which state?"
 
 ### Arizona
@@ -33,7 +33,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### California
 - Format: Capital calls, name the state.
 - Caller: Sacramento on line three
-- Audio line: "Everyone yells Los Angeles or San Francisco. I am Sacramento, asking for basic respect."
+- Audio line: "Yoooo— [beat]  We’re out here catchin’ waves, wearin’ sacred mementos around our necks. [beat] [drawn out] totally spiritual, bro[chuckles]!."
 - Prompt: "Sacramento belongs to which state?"
 
 ### Colorado
@@ -69,7 +69,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Hawaii
 - Format: State calls, name the capital.
 - Caller: Island hello line
-- Audio line: "Hawaii says hello twice, then adds Lulu at the end. That hello-Lulu sound points to the capital."
+- Audio line: "Lou 1: Aloha, this is Lou calling from Hawai'i! Lou 2:This is also Lou! Host:Hello Lou and Lou!"
 - Prompt: "Which capital belongs to Hawaii?"
 
 ### Idaho
