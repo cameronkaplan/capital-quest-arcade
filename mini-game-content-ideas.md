@@ -9,7 +9,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Alabama
 - Format: State calls, name the capital.
 - Caller: Mountain-gum dispatch
-- Audio line: "Alabama is on the line with Al on a mountain of gum. The capital sounds like Monty's gum mountain."
+- Audio line: "Al-Bam from the mountain gumery. I'm sittin' here on a mountain of gum and business is stickier than ever"
 - Prompt: "Which capital belongs to Alabama?"
 
 ### Alaska
@@ -218,8 +218,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Oklahoma
 - Format: State calls, name the capital.
-- Caller: Oak tree city desk
-- Audio line: "Oklahoma keeps it extremely straightforward. The state name comes right back with city at the end."
+- Caller: Too easy
+- Audio line: "Oklahoma calling. [beat] Our capital has a big cowboy museum, lots of oil history, and more Native American communities than any other place. [short pause] The name is also extremely easy to remember. [beat] Like… [emphasis]embarrassingly easy [chuckling]"
 - Prompt: "Which capital belongs to Oklahoma?"
 
 ### Oregon
@@ -253,10 +253,10 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 - Prompt: "Pierre is the capital of which Dakota?"
 
 ### Tennessee
-- Format: Capital calls, name the state.
+- Format: State calls, name the capital.
 - Caller: Music City line
-- Audio line: "Music City calling. I have guitars, a state capital job, and zero patience for Memphis guesses."
-- Prompt: "Nashville is the capital of which state?"
+- Audio line: "“Well hey, darlin’— [beat] [excited]Tennessee here [beat] and I brought my guitar! [pause] But,[chuckling] I got a [emphasis]tendency to [emphasis]gnash my teeth before I go on stage[chuckling]."
+- Prompt: "Which capital belongs to Tennessee?"
 
 ### Texas
 - Format: Capital calls, name the state.
