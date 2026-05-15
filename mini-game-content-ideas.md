@@ -25,10 +25,10 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 - Prompt: "Which capital belongs to Arizona?"
 
 ### Arkansas
-- Format: State calls, name the capital.
-- Caller: Tiny boulder bureau
-- Audio line: "Arkansas found a very small boulder in its pocket. The pocket rock is the capital clue."
-- Prompt: "Which capital belongs to Arkansas?"
+- Format: Capital calls, name the state.
+- Caller: Noah from the Ark
+- Audio line: "Noah’s journal— [pause] day three-twenty[sighing]. [pause] From the ark, we saw a [emphasis]little rock.  [pause]Still [emphasis]NO land. [pause] The animals are getting [emphasis]restless!."
+- Prompt: "Little Rock is the capital of which state?"
 
 ### California
 - Format: Capital calls, name the state.
@@ -111,7 +111,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Louisiana
 - Format: State calls, name the capital.
 - Caller: Red baton relay
-- Audio line: "Louisiana is passing a red baton down the river. The baton is the capital clue."
+- Audio line: "Louise:Besties— [beat] Louise and Anna here. Anna:Today we’re putting rouge on a bat. Louise: Low-key, this bat is serving night [emphasis] creature glam!."
 - Prompt: "Which capital belongs to Louisiana?"
 
 ### Maine
