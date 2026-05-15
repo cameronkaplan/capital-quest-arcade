@@ -146,8 +146,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Mississippi
 - Format: State calls, name the capital.
-- Caller: Moonwalk river line
-- Audio line: "Mississippi is moonwalking down the river with a famous Jackson. That name is the capital clue."
+- Caller: Ole' Mississippi Jack
+- Audio line: "Jack's on a Raft. Floatin' Down the Mississippi. Jack's on a River. Hummin' the blue."
 - Prompt: "Which capital belongs to Mississippi?"
 
 ### Missouri
@@ -236,8 +236,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Rhode Island
 - Format: State calls, name the capital.
-- Caller: Tiny island desk
-- Audio line: "Rhode Island says the answer is proven-dense. Providence is hiding in that sound."
+- Caller: Bike alibi
+- Audio line: "Listen— [beat] I rode the island on my bike. [pause] But you can’t prove I dented it. [short pause] That’s my story.”"
 - Prompt: "Which capital belongs to Rhode Island?"
 
 ### South Carolina
