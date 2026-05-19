@@ -62,8 +62,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Georgia
 - Format: State calls, name the capital.
-- Caller: Peach airport desk
-- Audio line: "Georgia is calling from the big airport city. The capital clue is traffic, peaches, and a very busy skyline."
+- Caller: Sailing the Atlantic
+- Audio line: "Ayy— [beat] it’s Georgia. [pause] I’m sailin’ the Atlantic, lookin’ real fancy.  But my heart still in Atlanta, baby."
 - Prompt: "Which capital belongs to Georgia?"
 
 ### Hawaii
@@ -242,8 +242,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### South Carolina
 - Format: State calls, name the capital.
-- Caller: Column of bees line
-- Audio line: "South Carolina says Caroline's column of bees flew south. Column-bee-a is the clue."
+- Caller: Column of bees
+- Audio line: "S[southern accent]Caroline! [gasp] [frantic]Run south, girl! [quick breath] There’s a [quick] column-uh bees [quick breath] comin' right atcha! [quick breath] South, Caroline! [beat] Move those feet!."
 - Prompt: "Which capital belongs to South Carolina?"
 
 ### South Dakota
