@@ -51,7 +51,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Delaware
 - Format: State calls, name the capital.
 - Caller: Driving-over desk
-- Audio line: "Delaware says it is driving over to the capital. Over, dover, close enough for the map."
+- Audio line: "[yelling]Della! [beat] Where is my Nintendo controller? [beat] Della, where? Hand it [emphasis] 'dover'."
 - Prompt: "Which capital belongs to Delaware?"
 
 ### Florida
@@ -122,8 +122,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Maryland
 - Format: State calls, name the capital.
-- Caller: Naval map desk
-- Audio line: "Maryland says Ann borrowed a police hat near the water. Ann-a-police is the clue."
+- Caller: Nursery Rhyme Trouble
+- Audio line: "[sung, sweet nursery rhyme voice]Mary had a little land—  [hard cut] And a police officer came and shut the whole thing down."
 - Prompt: "Which capital belongs to Maryland?"
 
 ### Massachusetts
@@ -231,7 +231,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Pennsylvania
 - Format: State calls, name the capital.
 - Caller: Hairy burger line
-- Audio line: "Pennsylvania says the capital is not Philly or Pittsburgh. Think hairy burger."
+- Audio line: "Ahright, yinz— [beat] grab yer pencil an' draw me a hairy burger. [short pause] Yeah, you heard me, [beat] a burger with hair on it n' at.[beat] Yinz [emphasis]got it!."
 - Prompt: "Which capital belongs to Pennsylvania?"
 
 ### Rhode Island
@@ -279,7 +279,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Virginia
 - Format: State calls, name the capital.
 - Caller: History money line
-- Audio line: "Virginia says its capital sounds like a rich man with history homework."
+- Audio line: "[classy southern accent]Hi y’all— [beat] it’s Virginia. [pause] My daddy’s a [emphasis]'rich' man, and he wants [emphasis]'everybody' to know it."
 - Prompt: "Which capital belongs to Virginia?"
 
 ### Washington
