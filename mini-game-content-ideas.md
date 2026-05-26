@@ -44,8 +44,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Connecticut
 - Format: State calls, name the capital.
-- Caller: Heart monitor line
-- Audio line: "Connecticut is sending a heart-shaped message. Follow the heart to the capital."
+- Caller: New England teacher
+- Audio line: "Okay, class— [beat] time to connect and cut. [pause] First, connect the dots. [short pause] Then cut out heart four. [beat] Heart four, please. Not heart three. We are not doing that again."
 - Prompt: "Which capital belongs to Connecticut?"
 
 ### Delaware
@@ -272,8 +272,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Vermont
 - Format: State calls, name the capital.
-- Caller: Tiny mountain desk
-- Audio line: "Vermont says a mountain might peel your skin. Mont-peel-ier is the clue."
+- Caller: It's not a potato!
+- Audio line: "Calling in from a very mountainy region. Very, very mountain [beat] an' we got a fella up here tryin’ to [emphasis]peel a mountain! [pause] Says his name is Monty Peeler! [short pause] I told him mountains [shakes head] don’t work like potatoes.."
 - Prompt: "Which capital belongs to Vermont?"
 
 ### Virginia
