@@ -116,8 +116,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### Maine
 - Format: State calls, name the capital.
-- Caller: Windy vacation desk
-- Audio line: "Maine says an August gust just hit the coast. August plus a gust points to the capital."
+- Caller: Lion with a mane problem
+- Audio line: "[Lion roar]Roar! [beat] a gust-uh wind hit my mane. [growl] This is un[emphasis]acceptable![short pause] I had volume. I had dignity!."
 - Prompt: "Which capital belongs to Maine?"
 
 ### Maryland
@@ -129,7 +129,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### Massachusetts
 - Format: Capital calls, name the state.
 - Caller: Boston on line six
-- Audio line: "This is Boston. Please pahk me in the right New England state."
+- Audio line: "[boston accent] Listen, kid—[beat]  I went to Harvard, so I know mass. [pause]  And the boss says this thing weighs a ton. [short pause] A whole boss-ton of mass. Wicked heavy."
 - Prompt: "Boston is calling from which state?"
 
 ### Michigan
@@ -183,7 +183,7 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 ### New Jersey
 - Format: State calls, name the capital.
 - Caller: Jersey train line
-- Audio line: "New Jersey says Trent has on a new jersey. Trent-on is the capital clue."
+- Audio line: "Yo what's up? It's Trent. I just put my new jersey on and honestly? The fit is loud and Trent is fully on."
 - Prompt: "Which capital belongs to New Jersey?"
 
 ### New Mexico
@@ -194,8 +194,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### New York
 - Format: State calls, name the capital.
-- Caller: Not the big city desk
-- Audio line: "New York says the famous city is not the capital. All bunnies go upstate for the clue."
+- Caller: Organized family bunny business
+- Audio line: "Listen here— in New York, all bunnies enjoy springtime. Every bunny. Real nice season. Capisce?"
 - Prompt: "Which capital belongs to New York?"
 
 ### North Carolina
@@ -290,8 +290,8 @@ Style target: 4-8 seconds, one caller, one joke or memory hook, no answer text s
 
 ### West Virginia
 - Format: State calls, name the capital.
-- Caller: Mountain dance line
-- Audio line: "West Virginia says it is dancing the Charleston through the mountains."
+- Caller: Charles Stone
+- Audio line: "Reporting Live from West of Virginia's Place. Charles is guarding a stone he claims is his. Charles' stone."
 - Prompt: "Which capital belongs to West Virginia?"
 
 ### Wisconsin
